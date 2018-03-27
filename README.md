@@ -1,6 +1,11 @@
  # System-Application-Monitor
  COMP3000 - Final Project
 
+#### BUILDING REQUIREMENTS
+libprocps
+>sudo apt install libprocps4 libprocps4-dev
+
+
 ## Background
 
 Using the Linux operating system, this utility offers a simple to use system monitor, that provides system information for temperatures of various hardware components. In addition, the software also the ability to detect memory leaks from running processes.
