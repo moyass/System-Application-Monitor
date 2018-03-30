@@ -1,0 +1,22 @@
+Code in C++ and perhaps bash
+
+
+For GUI use QT:
+https://www.qt.io/download
+
+Find and display temp.
+CPU core temps found in (0,1,2):
+/sys/class/hwmon
+or "cooling" dir and average all 4 cores 
+
+regulate extreme temps with fan
+
+FAN SPEED where are youuu?
+package to solve:
+lm-sensors
+fancontrol
+http://manpages.ubuntu.com/manpages/trusty/man8/fancontrol.8.html
+
+Look at github:
+https://github.com/TheBearCode/HardwareUI
+
