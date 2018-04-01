@@ -16,7 +16,6 @@
 #include <QtWidgets/QFrame>
 #include <QtWidgets/QHeaderView>
 #include <QtWidgets/QLabel>
-#include <QtWidgets/QProgressBar>
 #include <QtWidgets/QPushButton>
 #include <QtWidgets/QTableView>
 #include <QtWidgets/QWidget>
@@ -26,32 +25,33 @@ QT_BEGIN_NAMESPACE
 class Ui_Sysmon
 {
 public:
-    QPushButton *pushButton;
+    QPushButton *monitorButton;
     QLabel *label;
     QLabel *label_2;
     QLabel *label_3;
-    QPushButton *pushButton_2;
-    QProgressBar *progressBar;
+    QPushButton *aboutButton;
     QTableView *tableView;
     QFrame *line;
+    QPushButton *refreshButton;
 
     void setupUi(QWidget *Sysmon)
     {
         if (Sysmon->objectName().isEmpty())
             Sysmon->setObjectName(QStringLiteral("Sysmon"));
-        Sysmon->resize(589, 520);
-        QSizePolicy sizePolicy(QSizePolicy::Fixed, QSizePolicy::Fixed);
+        Sysmon->setWindowModality(Qt::WindowModal);
+        Sysmon->resize(800, 520);
+        QSizePolicy sizePolicy(QSizePolicy::Expanding, QSizePolicy::Fixed);
         sizePolicy.setHorizontalStretch(0);
         sizePolicy.setVerticalStretch(0);
         sizePolicy.setHeightForWidth(Sysmon->sizePolicy().hasHeightForWidth());
         Sysmon->setSizePolicy(sizePolicy);
         Sysmon->setMinimumSize(QSize(589, 520));
-        Sysmon->setMaximumSize(QSize(589, 520));
+        Sysmon->setMaximumSize(QSize(800, 520));
         Sysmon->setBaseSize(QSize(589, 520));
         Sysmon->setAutoFillBackground(false);
-        pushButton = new QPushButton(Sysmon);
-        pushButton->setObjectName(QStringLiteral("pushButton"));
-        pushButton->setGeometry(QRect(10, 470, 101, 41));
+        monitorButton = new QPushButton(Sysmon);
+        monitorButton->setObjectName(QStringLiteral("monitorButton"));
+        monitorButton->setGeometry(QRect(10, 470, 101, 41));
         QPalette palette;
         QBrush brush(QColor(0, 0, 0, 255));
         brush.setStyle(Qt::SolidPattern);
@@ -108,21 +108,21 @@ public:
         palette.setBrush(QPalette::Disabled, QPalette::AlternateBase, brush1);
         palette.setBrush(QPalette::Disabled, QPalette::ToolTipBase, brush4);
         palette.setBrush(QPalette::Disabled, QPalette::ToolTipText, brush);
-        pushButton->setPalette(palette);
-        pushButton->setAutoDefault(false);
-        pushButton->setFlat(false);
+        monitorButton->setPalette(palette);
+        monitorButton->setAutoDefault(false);
+        monitorButton->setFlat(false);
         label = new QLabel(Sysmon);
         label->setObjectName(QStringLiteral("label"));
         label->setGeometry(QRect(10, 10, 121, 16));
         label_2 = new QLabel(Sysmon);
         label_2->setObjectName(QStringLiteral("label_2"));
-        label_2->setGeometry(QRect(420, 10, 161, 16));
+        label_2->setGeometry(QRect(260, 10, 161, 16));
         label_3 = new QLabel(Sysmon);
         label_3->setObjectName(QStringLiteral("label_3"));
         label_3->setGeometry(QRect(120, 480, 321, 16));
-        pushButton_2 = new QPushButton(Sysmon);
-        pushButton_2->setObjectName(QStringLiteral("pushButton_2"));
-        pushButton_2->setGeometry(QRect(480, 470, 101, 41));
+        aboutButton = new QPushButton(Sysmon);
+        aboutButton->setObjectName(QStringLiteral("aboutButton"));
+        aboutButton->setGeometry(QRect(690, 470, 101, 41));
         QPalette palette1;
         palette1.setBrush(QPalette::Active, QPalette::WindowText, brush);
         palette1.setBrush(QPalette::Active, QPalette::Button, brush1);
@@ -169,30 +169,55 @@ public:
         palette1.setBrush(QPalette::Disabled, QPalette::AlternateBase, brush1);
         palette1.setBrush(QPalette::Disabled, QPalette::ToolTipBase, brush4);
         palette1.setBrush(QPalette::Disabled, QPalette::ToolTipText, brush);
-        pushButton_2->setPalette(palette1);
-        pushButton_2->setAutoDefault(false);
-        pushButton_2->setFlat(false);
-        progressBar = new QProgressBar(Sysmon);
-        progressBar->setObjectName(QStringLiteral("progressBar"));
-        progressBar->setGeometry(QRect(420, 50, 151, 391));
-        progressBar->setValue(24);
+        aboutButton->setPalette(palette1);
+        aboutButton->setAutoDefault(false);
+        aboutButton->setFlat(false);
         tableView = new QTableView(Sysmon);
         tableView->setObjectName(QStringLiteral("tableView"));
-        tableView->setGeometry(QRect(10, 50, 404, 391));
+        tableView->setEnabled(true);
+        tableView->setGeometry(QRect(10, 50, 406, 391));
+        QSizePolicy sizePolicy1(QSizePolicy::Minimum, QSizePolicy::Fixed);
+        sizePolicy1.setHorizontalStretch(0);
+        sizePolicy1.setVerticalStretch(0);
+        sizePolicy1.setHeightForWidth(tableView->sizePolicy().hasHeightForWidth());
+        tableView->setSizePolicy(sizePolicy1);
+        tableView->setMinimumSize(QSize(390, 391));
+        tableView->setMaximumSize(QSize(406, 391));
+        tableView->setSizeIncrement(QSize(0, 0));
+        QFont font;
+        font.setFamily(QStringLiteral("Sans Serif"));
+        font.setPointSize(10);
+        tableView->setFont(font);
+        tableView->setSizeAdjustPolicy(QAbstractScrollArea::AdjustToContents);
+        tableView->setEditTriggers(QAbstractItemView::NoEditTriggers);
+        tableView->setSelectionMode(QAbstractItemView::SingleSelection);
+        tableView->setSelectionBehavior(QAbstractItemView::SelectRows);
         tableView->setGridStyle(Qt::DashLine);
+        tableView->setSortingEnabled(false);
         tableView->setWordWrap(false);
-        tableView->horizontalHeader()->setDefaultSectionSize(134);
+        tableView->horizontalHeader()->setCascadingSectionResizes(true);
+        tableView->horizontalHeader()->setDefaultSectionSize(130);
+        tableView->horizontalHeader()->setHighlightSections(false);
+        tableView->horizontalHeader()->setMinimumSectionSize(70);
+        tableView->horizontalHeader()->setProperty("showSortIndicator", QVariant(false));
+        tableView->horizontalHeader()->setStretchLastSection(false);
         tableView->verticalHeader()->setVisible(false);
+        tableView->verticalHeader()->setCascadingSectionResizes(false);
+        tableView->verticalHeader()->setDefaultSectionSize(30);
+        tableView->verticalHeader()->setMinimumSectionSize(30);
         line = new QFrame(Sysmon);
         line->setObjectName(QStringLiteral("line"));
         line->setGeometry(QRect(250, 450, 118, 3));
         line->setFrameShape(QFrame::HLine);
         line->setFrameShadow(QFrame::Sunken);
+        refreshButton = new QPushButton(Sysmon);
+        refreshButton->setObjectName(QStringLiteral("refreshButton"));
+        refreshButton->setGeometry(QRect(10, 30, 80, 22));
 
         retranslateUi(Sysmon);
 
-        pushButton->setDefault(false);
-        pushButton_2->setDefault(false);
+        monitorButton->setDefault(false);
+        aboutButton->setDefault(false);
 
 
         QMetaObject::connectSlotsByName(Sysmon);
@@ -201,11 +226,12 @@ public:
     void retranslateUi(QWidget *Sysmon)
     {
         Sysmon->setWindowTitle(QApplication::translate("Sysmon", "Sysmon", 0));
-        pushButton->setText(QApplication::translate("Sysmon", "Monitor", 0));
+        monitorButton->setText(QApplication::translate("Sysmon", "Monitor", 0));
         label->setText(QApplication::translate("Sysmon", "Running Processes", 0));
         label_2->setText(QApplication::translate("Sysmon", "Temperature Information", 0));
         label_3->setText(QApplication::translate("Sysmon", "Currently No Process Seems to have a memory leak", 0));
-        pushButton_2->setText(QApplication::translate("Sysmon", "About", 0));
+        aboutButton->setText(QApplication::translate("Sysmon", "About", 0));
+        refreshButton->setText(QApplication::translate("Sysmon", "Refresh", 0));
     } // retranslateUi
 
 };

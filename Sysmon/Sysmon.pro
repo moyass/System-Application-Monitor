@@ -13,8 +13,13 @@ TEMPLATE = app
 
 
 SOURCES += main.cpp\
-        sysmon.cpp
+        sysmon.cpp \
+    get-proc-info.cpp
 
-HEADERS  += sysmon.h
+HEADERS  += sysmon.h \
+    main.h
 
 FORMS    += sysmon.ui
+
+LIBS += -lprocps
+
