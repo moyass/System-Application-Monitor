@@ -23,7 +23,7 @@ int CoreTemp(){
 
 	}
 	pclose(fp);
-	average_core_temp /= number_of_cores;
+	average_core_temp /= number_of_cores * 1000;
 	return average_core_temp;
 	
 }
@@ -31,6 +31,6 @@ int CoreTemp(){
 
 int main () {
 	
-	cout << "Average cpu temp: " << CoreTemp() << endl;
+	cout << "Average cpu temp: " << CoreTemp() << " degrees Celcius" << endl;
 	return 0;
 }
