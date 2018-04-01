@@ -7,36 +7,23 @@
 #include <string>
 using namespace std;
 
-const char *thermal[] = {
-"/sys/class/thermal/thermal_zone0/temp", 
-"/sys/class/thermal/thermal_zone1/temp", 
-"/sys/class/thermal/thermal_zone2/temp", 
-"/sys/class/thermal/thermal_zone3/temp"
-};
 
 int CoreTemp(){
 	string line;
-	//average of all 4 core temps
-	int average_core_temp = 0;
-	int core_temp = 0;
+	FILE *fp = popen("cat /sys/class/thermal/thermal_zone*/temp", "r");
+	char buffer[BUFSIZ];
+	int core_temp, number_of_cores, average_core_temp;
 	
-	for(int i = 0; i<4; i++){
-	
-		ifstream core(thermal[i]);
-		if (core.is_open())
-		{
-			while ( getline (core,line) )
-			{
-			  stringstream current_temp(line);
-			  current_temp >> core_temp;
-			  average_core_temp += core_temp;
-			}
-			core.close();
-		}
+	while ( fgets( buffer, BUFSIZ, fp ) != NULL ) {
 
-		else cout << "Unable to open file";
+	  stringstream current_temp(buffer);
+	  current_temp >> core_temp;
+	  average_core_temp += core_temp;
+	  number_of_cores++;
+
 	}
-	average_core_temp /= 4;
+	pclose(fp);
+	average_core_temp /= number_of_cores;
 	return average_core_temp;
 	
 }
