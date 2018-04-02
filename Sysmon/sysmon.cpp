@@ -29,7 +29,6 @@ vector<pid_t> Sysmon::listDir(const string& path)
                 listofprocs.push_back(current);
 
 
-
     closedir (dir);
     return listofprocs;
 }
@@ -64,17 +63,15 @@ void GetAllProcsInfo(procinfo *tProcInfo, vector<pid_t> *procs, bool display){
 void Sysmon::Temp(QStandardItemModel *inputModel, vector<pid_t> procs){
 
     QStandardItem *currentPID, *pidCommand, *pidMemUsage;
-
     QString myString = "";
-
     int row = 0;
 
     for (pid_t pid : procs){
         get_proc_info(pid, &procInfo);
 
         myString = QString::number(procInfo.pid);
-        currentPID = new QStandardItem(myString);
-        pidCommand = new QStandardItem(procInfo.exName);
+        currentPID  = new QStandardItem(myString);
+        pidCommand  = new QStandardItem(procInfo.exName);
         pidMemUsage = new QStandardItem(QString::number(procInfo.vsize));
 
         QStandardItem *myData[] = {currentPID, pidCommand, pidMemUsage};
@@ -92,10 +89,7 @@ void Sysmon::PopulateTable(QStandardItemModel *inputModel,QStandardItem *data[],
 
 Sysmon::Sysmon(QWidget *parent) :QWidget(parent), ui(new Ui::Sysmon)
 {
-
     ui->setupUi(this);
-
-
 
     /*
     cout << "Total Process Count " << procs.size() << endl;
@@ -115,7 +109,7 @@ Sysmon::Sysmon(QWidget *parent) :QWidget(parent), ui(new Ui::Sysmon)
 
     connect(ui->aboutButton   , SIGNAL(released()), this, SLOT(aboutButtonHandler()));
     connect(ui->monitorButton , SIGNAL(released()), this, SLOT(monitorButtonHandler()));
-    //connect(ui->refreshButton , SIGNAL(released()), this, SLOT(refreshButtonHandler()));
+    connect(ui->refreshButton , SIGNAL(released()), this, SLOT(refreshButtonHandler()));
 
 
     /*
@@ -162,10 +156,16 @@ void Sysmon::monitorButtonHandler(){
 }
 
 void Sysmon::refreshButtonHandler(){
+    cout << "DSA" << endl;
+
     procs = listDir("/proc/");
     GetAllProcsInfo(&procInfo, &procs, 0);
     Sysmon::Temp(model,procs);
     ui->tableView->setModel(model);
+    //ui->tableView->setIte
+    ui->tableView->update();
+
+    cout << "SDA" << endl;
 }
 
 Sysmon::~Sysmon()
