@@ -17,6 +17,7 @@
 #include <QtWidgets/QHeaderView>
 #include <QtWidgets/QLabel>
 #include <QtWidgets/QPushButton>
+#include <QtWidgets/QTabWidget>
 #include <QtWidgets/QTableView>
 #include <QtWidgets/QWidget>
 
@@ -25,14 +26,16 @@ QT_BEGIN_NAMESPACE
 class Ui_Sysmon
 {
 public:
-    QPushButton *monitorButton;
-    QLabel *label;
-    QLabel *label_2;
+    QTabWidget *tabWidget;
+    QWidget *tab;
+    QPushButton *refreshButton;
     QLabel *label_3;
     QPushButton *aboutButton;
-    QTableView *tableView;
+    QPushButton *monitorButton;
     QFrame *line;
-    QPushButton *refreshButton;
+    QTableView *tableView;
+    QWidget *tab_2;
+    QLabel *label;
 
     void setupUi(QWidget *Sysmon)
     {
@@ -49,9 +52,20 @@ public:
         Sysmon->setMaximumSize(QSize(800, 520));
         Sysmon->setBaseSize(QSize(589, 520));
         Sysmon->setAutoFillBackground(false);
-        monitorButton = new QPushButton(Sysmon);
-        monitorButton->setObjectName(QStringLiteral("monitorButton"));
-        monitorButton->setGeometry(QRect(10, 470, 101, 41));
+        tabWidget = new QTabWidget(Sysmon);
+        tabWidget->setObjectName(QStringLiteral("tabWidget"));
+        tabWidget->setGeometry(QRect(0, 0, 801, 521));
+        tab = new QWidget();
+        tab->setObjectName(QStringLiteral("tab"));
+        refreshButton = new QPushButton(tab);
+        refreshButton->setObjectName(QStringLiteral("refreshButton"));
+        refreshButton->setGeometry(QRect(700, 10, 80, 21));
+        label_3 = new QLabel(tab);
+        label_3->setObjectName(QStringLiteral("label_3"));
+        label_3->setGeometry(QRect(130, 460, 321, 16));
+        aboutButton = new QPushButton(tab);
+        aboutButton->setObjectName(QStringLiteral("aboutButton"));
+        aboutButton->setGeometry(QRect(690, 440, 101, 41));
         QPalette palette;
         QBrush brush(QColor(0, 0, 0, 255));
         brush.setStyle(Qt::SolidPattern);
@@ -108,21 +122,12 @@ public:
         palette.setBrush(QPalette::Disabled, QPalette::AlternateBase, brush1);
         palette.setBrush(QPalette::Disabled, QPalette::ToolTipBase, brush4);
         palette.setBrush(QPalette::Disabled, QPalette::ToolTipText, brush);
-        monitorButton->setPalette(palette);
-        monitorButton->setAutoDefault(false);
-        monitorButton->setFlat(false);
-        label = new QLabel(Sysmon);
-        label->setObjectName(QStringLiteral("label"));
-        label->setGeometry(QRect(10, 10, 121, 16));
-        label_2 = new QLabel(Sysmon);
-        label_2->setObjectName(QStringLiteral("label_2"));
-        label_2->setGeometry(QRect(260, 10, 161, 16));
-        label_3 = new QLabel(Sysmon);
-        label_3->setObjectName(QStringLiteral("label_3"));
-        label_3->setGeometry(QRect(120, 480, 321, 16));
-        aboutButton = new QPushButton(Sysmon);
-        aboutButton->setObjectName(QStringLiteral("aboutButton"));
-        aboutButton->setGeometry(QRect(690, 470, 101, 41));
+        aboutButton->setPalette(palette);
+        aboutButton->setAutoDefault(false);
+        aboutButton->setFlat(false);
+        monitorButton = new QPushButton(tab);
+        monitorButton->setObjectName(QStringLiteral("monitorButton"));
+        monitorButton->setGeometry(QRect(10, 440, 101, 41));
         QPalette palette1;
         palette1.setBrush(QPalette::Active, QPalette::WindowText, brush);
         palette1.setBrush(QPalette::Active, QPalette::Button, brush1);
@@ -169,13 +174,18 @@ public:
         palette1.setBrush(QPalette::Disabled, QPalette::AlternateBase, brush1);
         palette1.setBrush(QPalette::Disabled, QPalette::ToolTipBase, brush4);
         palette1.setBrush(QPalette::Disabled, QPalette::ToolTipText, brush);
-        aboutButton->setPalette(palette1);
-        aboutButton->setAutoDefault(false);
-        aboutButton->setFlat(false);
-        tableView = new QTableView(Sysmon);
+        monitorButton->setPalette(palette1);
+        monitorButton->setAutoDefault(false);
+        monitorButton->setFlat(false);
+        line = new QFrame(tab);
+        line->setObjectName(QStringLiteral("line"));
+        line->setGeometry(QRect(240, 410, 118, 3));
+        line->setFrameShape(QFrame::HLine);
+        line->setFrameShadow(QFrame::Sunken);
+        tableView = new QTableView(tab);
         tableView->setObjectName(QStringLiteral("tableView"));
         tableView->setEnabled(true);
-        tableView->setGeometry(QRect(10, 50, 406, 391));
+        tableView->setGeometry(QRect(10, 20, 406, 391));
         QSizePolicy sizePolicy1(QSizePolicy::Minimum, QSizePolicy::Fixed);
         sizePolicy1.setHorizontalStretch(0);
         sizePolicy1.setVerticalStretch(0);
@@ -205,19 +215,32 @@ public:
         tableView->verticalHeader()->setCascadingSectionResizes(false);
         tableView->verticalHeader()->setDefaultSectionSize(30);
         tableView->verticalHeader()->setMinimumSectionSize(30);
-        line = new QFrame(Sysmon);
-        line->setObjectName(QStringLiteral("line"));
-        line->setGeometry(QRect(250, 450, 118, 3));
-        line->setFrameShape(QFrame::HLine);
-        line->setFrameShadow(QFrame::Sunken);
-        refreshButton = new QPushButton(Sysmon);
-        refreshButton->setObjectName(QStringLiteral("refreshButton"));
-        refreshButton->setGeometry(QRect(10, 30, 80, 22));
+        tabWidget->addTab(tab, QString());
+        refreshButton->raise();
+        refreshButton->raise();
+        label_3->raise();
+        aboutButton->raise();
+        tableView->raise();
+        monitorButton->raise();
+        line->raise();
+        refreshButton->raise();
+        label_3->raise();
+        aboutButton->raise();
+        monitorButton->raise();
+        line->raise();
+        tableView->raise();
+        tab_2 = new QWidget();
+        tab_2->setObjectName(QStringLiteral("tab_2"));
+        label = new QLabel(tab_2);
+        label->setObjectName(QStringLiteral("label"));
+        label->setGeometry(QRect(10, 10, 151, 16));
+        tabWidget->addTab(tab_2, QString());
 
         retranslateUi(Sysmon);
 
-        monitorButton->setDefault(false);
+        tabWidget->setCurrentIndex(1);
         aboutButton->setDefault(false);
+        monitorButton->setDefault(false);
 
 
         QMetaObject::connectSlotsByName(Sysmon);
@@ -226,12 +249,13 @@ public:
     void retranslateUi(QWidget *Sysmon)
     {
         Sysmon->setWindowTitle(QApplication::translate("Sysmon", "Sysmon", 0));
-        monitorButton->setText(QApplication::translate("Sysmon", "Monitor", 0));
-        label->setText(QApplication::translate("Sysmon", "Running Processes", 0));
-        label_2->setText(QApplication::translate("Sysmon", "Temperature Information", 0));
+        refreshButton->setText(QApplication::translate("Sysmon", "Refresh", 0));
         label_3->setText(QApplication::translate("Sysmon", "Currently No Process Seems to have a memory leak", 0));
         aboutButton->setText(QApplication::translate("Sysmon", "About", 0));
-        refreshButton->setText(QApplication::translate("Sysmon", "Refresh", 0));
+        monitorButton->setText(QApplication::translate("Sysmon", "Monitor", 0));
+        tabWidget->setTabText(tabWidget->indexOf(tab), QApplication::translate("Sysmon", "Processess", 0));
+        label->setText(QApplication::translate("Sysmon", "Temperature and Shit", 0));
+        tabWidget->setTabText(tabWidget->indexOf(tab_2), QApplication::translate("Sysmon", "Hardware Info", 0));
     } // retranslateUi
 
 };
