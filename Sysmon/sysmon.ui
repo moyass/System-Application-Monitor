@@ -53,7 +53,7 @@
     </rect>
    </property>
    <property name="currentIndex">
-    <number>1</number>
+    <number>0</number>
    </property>
    <widget class="QWidget" name="tab">
     <attribute name="title">
@@ -62,7 +62,7 @@
     <widget class="QPushButton" name="refreshButton">
      <property name="geometry">
       <rect>
-       <x>700</x>
+       <x>710</x>
        <y>10</y>
        <width>80</width>
        <height>21</height>
@@ -978,9 +978,9 @@
      </property>
      <property name="geometry">
       <rect>
-       <x>10</x>
-       <y>20</y>
-       <width>406</width>
+       <x>0</x>
+       <y>40</y>
+       <width>800</width>
        <height>391</height>
       </rect>
      </property>
@@ -992,14 +992,14 @@
      </property>
      <property name="minimumSize">
       <size>
-       <width>390</width>
+       <width>800</width>
        <height>391</height>
       </size>
      </property>
      <property name="maximumSize">
       <size>
        <width>406</width>
-       <height>391</height>
+       <height>805</height>
       </size>
      </property>
      <property name="sizeIncrement">
@@ -1066,19 +1066,6 @@
       <number>30</number>
      </attribute>
     </widget>
-    <zorder>refreshButton</zorder>
-    <zorder>refreshButton</zorder>
-    <zorder>label_3</zorder>
-    <zorder>aboutButton</zorder>
-    <zorder>tableView</zorder>
-    <zorder>monitorButton</zorder>
-    <zorder>line</zorder>
-    <zorder>refreshButton</zorder>
-    <zorder>label_3</zorder>
-    <zorder>aboutButton</zorder>
-    <zorder>monitorButton</zorder>
-    <zorder>line</zorder>
-    <zorder>tableView</zorder>
    </widget>
    <widget class="QWidget" name="tab_2">
     <attribute name="title">

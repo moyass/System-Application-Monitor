@@ -185,14 +185,14 @@ public:
         tableView = new QTableView(tab);
         tableView->setObjectName(QStringLiteral("tableView"));
         tableView->setEnabled(true);
-        tableView->setGeometry(QRect(10, 20, 406, 391));
+        tableView->setGeometry(QRect(0, 40, 800, 391));
         QSizePolicy sizePolicy1(QSizePolicy::Minimum, QSizePolicy::Fixed);
         sizePolicy1.setHorizontalStretch(0);
         sizePolicy1.setVerticalStretch(0);
         sizePolicy1.setHeightForWidth(tableView->sizePolicy().hasHeightForWidth());
         tableView->setSizePolicy(sizePolicy1);
-        tableView->setMinimumSize(QSize(390, 391));
-        tableView->setMaximumSize(QSize(406, 391));
+        tableView->setMinimumSize(QSize(800, 391));
+        tableView->setMaximumSize(QSize(406, 805));
         tableView->setSizeIncrement(QSize(0, 0));
         QFont font;
         font.setFamily(QStringLiteral("Sans Serif"));
@@ -216,19 +216,6 @@ public:
         tableView->verticalHeader()->setDefaultSectionSize(30);
         tableView->verticalHeader()->setMinimumSectionSize(30);
         tabWidget->addTab(tab, QString());
-        refreshButton->raise();
-        refreshButton->raise();
-        label_3->raise();
-        aboutButton->raise();
-        tableView->raise();
-        monitorButton->raise();
-        line->raise();
-        refreshButton->raise();
-        label_3->raise();
-        aboutButton->raise();
-        monitorButton->raise();
-        line->raise();
-        tableView->raise();
         tab_2 = new QWidget();
         tab_2->setObjectName(QStringLiteral("tab_2"));
         label = new QLabel(tab_2);
@@ -238,7 +225,7 @@ public:
 
         retranslateUi(Sysmon);
 
-        tabWidget->setCurrentIndex(1);
+        tabWidget->setCurrentIndex(0);
         aboutButton->setDefault(false);
         monitorButton->setDefault(false);
 
