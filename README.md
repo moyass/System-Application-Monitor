@@ -5,6 +5,9 @@
 libprocps
 >sudo apt install libprocps4 libprocps4-dev
 
+Qt Creator
+https://wiki.qt.io/Install_Qt_5_on_Ubuntu
+
 
 ## Background
 
