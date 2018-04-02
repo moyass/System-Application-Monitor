@@ -42,24 +42,30 @@ public:
         if (Sysmon->objectName().isEmpty())
             Sysmon->setObjectName(QStringLiteral("Sysmon"));
         Sysmon->setWindowModality(Qt::WindowModal);
-        Sysmon->resize(800, 520);
+        Sysmon->resize(805, 520);
         QSizePolicy sizePolicy(QSizePolicy::Expanding, QSizePolicy::Fixed);
         sizePolicy.setHorizontalStretch(0);
         sizePolicy.setVerticalStretch(0);
         sizePolicy.setHeightForWidth(Sysmon->sizePolicy().hasHeightForWidth());
         Sysmon->setSizePolicy(sizePolicy);
         Sysmon->setMinimumSize(QSize(589, 520));
-        Sysmon->setMaximumSize(QSize(800, 520));
+        Sysmon->setMaximumSize(QSize(805, 520));
         Sysmon->setBaseSize(QSize(589, 520));
         Sysmon->setAutoFillBackground(false);
         tabWidget = new QTabWidget(Sysmon);
         tabWidget->setObjectName(QStringLiteral("tabWidget"));
-        tabWidget->setGeometry(QRect(0, 0, 801, 521));
+        tabWidget->setGeometry(QRect(0, 0, 805, 521));
+        QSizePolicy sizePolicy1(QSizePolicy::Fixed, QSizePolicy::Fixed);
+        sizePolicy1.setHorizontalStretch(0);
+        sizePolicy1.setVerticalStretch(0);
+        sizePolicy1.setHeightForWidth(tabWidget->sizePolicy().hasHeightForWidth());
+        tabWidget->setSizePolicy(sizePolicy1);
+        tabWidget->setMaximumSize(QSize(805, 521));
         tab = new QWidget();
         tab->setObjectName(QStringLiteral("tab"));
         refreshButton = new QPushButton(tab);
         refreshButton->setObjectName(QStringLiteral("refreshButton"));
-        refreshButton->setGeometry(QRect(700, 10, 80, 21));
+        refreshButton->setGeometry(QRect(599, 440, 81, 41));
         label_3 = new QLabel(tab);
         label_3->setObjectName(QStringLiteral("label_3"));
         label_3->setGeometry(QRect(130, 460, 321, 16));
@@ -185,14 +191,14 @@ public:
         tableView = new QTableView(tab);
         tableView->setObjectName(QStringLiteral("tableView"));
         tableView->setEnabled(true);
-        tableView->setGeometry(QRect(10, 20, 406, 391));
-        QSizePolicy sizePolicy1(QSizePolicy::Minimum, QSizePolicy::Fixed);
-        sizePolicy1.setHorizontalStretch(0);
-        sizePolicy1.setVerticalStretch(0);
-        sizePolicy1.setHeightForWidth(tableView->sizePolicy().hasHeightForWidth());
-        tableView->setSizePolicy(sizePolicy1);
+        tableView->setGeometry(QRect(10, 20, 781, 391));
+        QSizePolicy sizePolicy2(QSizePolicy::Minimum, QSizePolicy::Fixed);
+        sizePolicy2.setHorizontalStretch(0);
+        sizePolicy2.setVerticalStretch(0);
+        sizePolicy2.setHeightForWidth(tableView->sizePolicy().hasHeightForWidth());
+        tableView->setSizePolicy(sizePolicy2);
         tableView->setMinimumSize(QSize(390, 391));
-        tableView->setMaximumSize(QSize(406, 391));
+        tableView->setMaximumSize(QSize(16777215, 391));
         tableView->setSizeIncrement(QSize(0, 0));
         QFont font;
         font.setFamily(QStringLiteral("Sans Serif"));
@@ -238,7 +244,7 @@ public:
 
         retranslateUi(Sysmon);
 
-        tabWidget->setCurrentIndex(1);
+        tabWidget->setCurrentIndex(0);
         aboutButton->setDefault(false);
         monitorButton->setDefault(false);
 

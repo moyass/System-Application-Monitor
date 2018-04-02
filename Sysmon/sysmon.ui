@@ -9,7 +9,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>800</width>
+    <width>805</width>
     <height>520</height>
    </rect>
   </property>
@@ -27,7 +27,7 @@
   </property>
   <property name="maximumSize">
    <size>
-    <width>800</width>
+    <width>805</width>
     <height>520</height>
    </size>
   </property>
@@ -48,12 +48,24 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>801</width>
+     <width>805</width>
      <height>521</height>
     </rect>
    </property>
+   <property name="sizePolicy">
+    <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+     <horstretch>0</horstretch>
+     <verstretch>0</verstretch>
+    </sizepolicy>
+   </property>
+   <property name="maximumSize">
+    <size>
+     <width>805</width>
+     <height>521</height>
+    </size>
+   </property>
    <property name="currentIndex">
-    <number>1</number>
+    <number>0</number>
    </property>
    <widget class="QWidget" name="tab">
     <attribute name="title">
@@ -62,10 +74,10 @@
     <widget class="QPushButton" name="refreshButton">
      <property name="geometry">
       <rect>
-       <x>700</x>
-       <y>10</y>
-       <width>80</width>
-       <height>21</height>
+       <x>599</x>
+       <y>440</y>
+       <width>81</width>
+       <height>41</height>
       </rect>
      </property>
      <property name="text">
@@ -980,7 +992,7 @@
       <rect>
        <x>10</x>
        <y>20</y>
-       <width>406</width>
+       <width>781</width>
        <height>391</height>
       </rect>
      </property>
@@ -998,7 +1010,7 @@
      </property>
      <property name="maximumSize">
       <size>
-       <width>406</width>
+       <width>16777215</width>
        <height>391</height>
       </size>
      </property>
