@@ -1,12 +1,13 @@
  # System-Application-Monitor
  COMP3000 - Final Project
 
-#### BUILDING REQUIREMENTS
-libprocps
->sudo apt install libprocps4 libprocps4-dev
+## BUILDING REQUIREMENTS
+#### libprocps
+> sudo apt install libprocps4 libprocps4-dev
 
-Qt Creator
-https://wiki.qt.io/Install_Qt_5_on_Ubuntu
+##### cpupower
+> sudo apt install cpupower <br>
+> sudo apt install linux-tools-generic
 
 
 ## Background
