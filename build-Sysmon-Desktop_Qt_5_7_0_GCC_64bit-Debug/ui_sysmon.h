@@ -191,7 +191,7 @@ public:
         tableView = new QTableView(tab);
         tableView->setObjectName(QStringLiteral("tableView"));
         tableView->setEnabled(true);
-        tableView->setGeometry(QRect(10, 20, 781, 391));
+        tableView->setGeometry(QRect(0, 20, 800, 391));
         QSizePolicy sizePolicy2(QSizePolicy::Minimum, QSizePolicy::Fixed);
         sizePolicy2.setHorizontalStretch(0);
         sizePolicy2.setVerticalStretch(0);
@@ -212,9 +212,9 @@ public:
         tableView->setSortingEnabled(false);
         tableView->setWordWrap(false);
         tableView->horizontalHeader()->setCascadingSectionResizes(true);
-        tableView->horizontalHeader()->setDefaultSectionSize(130);
+        tableView->horizontalHeader()->setDefaultSectionSize(155);
         tableView->horizontalHeader()->setHighlightSections(false);
-        tableView->horizontalHeader()->setMinimumSectionSize(70);
+        tableView->horizontalHeader()->setMinimumSectionSize(140);
         tableView->horizontalHeader()->setProperty("showSortIndicator", QVariant(false));
         tableView->horizontalHeader()->setStretchLastSection(false);
         tableView->verticalHeader()->setVisible(false);

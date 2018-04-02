@@ -44,13 +44,14 @@ void GetAllProcsInfo(procinfo *tProcInfo, vector<pid_t> *procs, bool display){
                 << setw(20) << tProcInfo -> vsize
                 << endl;
 
-
-            /** LOGIC
+            /**
+             * LOGIC
              * Get the value in the first loop and store it in old
              * in the second loop we compare that last value of old
              * memory old history.
-             *
              */
+
+
             if (strcmp(tProcInfo -> exName, "a.out") == 0){
                 cout << tProcInfo -> exName << " under PID " << tProcInfo -> pid
                      << " is using " << tProcInfo -> vsize / 1024 << " MB" << endl;
@@ -62,22 +63,32 @@ void GetAllProcsInfo(procinfo *tProcInfo, vector<pid_t> *procs, bool display){
 
 void Sysmon::Temp(QStandardItemModel *inputModel, vector<pid_t> procs){
 
-    QStandardItem *currentPID, *pidCommand, *pidMemUsage;
+    QStandardItem *currentPID, *pidCommand, *pidMemUsage, *pidRssSize, *pidState;
     QString myString = "";
     int row = 0;
 
     for (pid_t pid : procs){
         get_proc_info(pid, &procInfo);
 
-        myString = QString::number(procInfo.pid);
-        currentPID  = new QStandardItem(myString);
+        myString = QString(procInfo.state);
+
+        if (myString.compare("S")){
+            myString = QString("Running");
+        } else {
+            myString = QString("Sleeping");
+        }
+
+        currentPID  = new QStandardItem(QString::number(procInfo.pid));
         pidCommand  = new QStandardItem(procInfo.exName);
         pidMemUsage = new QStandardItem(QString::number(procInfo.vsize));
+        pidRssSize  = new QStandardItem(QString::number(procInfo.rss));
+        pidState    = new QStandardItem(myString);
 
-        QStandardItem *myData[] = {currentPID, pidCommand, pidMemUsage};
+
+        QStandardItem *myData[] = {pidState, currentPID, pidCommand, pidMemUsage, pidRssSize };
 
         PopulateTable(inputModel,myData, row++);
-
+        ui->tableView->update();
     }
 }
 
@@ -85,26 +96,21 @@ void Sysmon::PopulateTable(QStandardItemModel *inputModel,QStandardItem *data[],
     inputModel->setItem(row,0,data[0]);
     inputModel->setItem(row,1,data[1]);
     inputModel->setItem(row,2,data[2]);
+    inputModel->setItem(row,3,data[3]);
+    inputModel->setItem(row,4,data[4]);
+    //inputModel->setItem(row,5,data[5]);
 }
 
 Sysmon::Sysmon(QWidget *parent) :QWidget(parent), ui(new Ui::Sysmon)
 {
     ui->setupUi(this);
+    model->setHorizontalHeaderItem(0, new QStandardItem(QString("Process State")));
+    model->setHorizontalHeaderItem(1, new QStandardItem(QString("PID")));
+    model->setHorizontalHeaderItem(2, new QStandardItem(QString("Command")));
+    model->setHorizontalHeaderItem(3, new QStandardItem(QString("Memory Usage (KB)")));
+    model->setHorizontalHeaderItem(4, new QStandardItem(QString("Resident Memory (KB)")));
 
-    /*
-    cout << "Total Process Count " << procs.size() << endl;
-       cout << "Process PID  " << setw(6) << setw(20) <<  "COMMAND NAME"
-                << setw(20) << "RSS" << setw(20) << "VmSize" << endl;
-    */
-
-    procs = listDir("/proc/");
-    GetAllProcsInfo(&procInfo, &procs, 0);
-
-    model->setHorizontalHeaderItem(0, new QStandardItem(QString("PID")));
-    model->setHorizontalHeaderItem(1, new QStandardItem(QString("Command")));
-    model->setHorizontalHeaderItem(2, new QStandardItem(QString("Memory Usage (KB)")));
-
-    Sysmon::Temp(model,procs);
+    Sysmon::refreshButtonHandler();
 
 
     connect(ui->aboutButton   , SIGNAL(released()), this, SLOT(aboutButtonHandler()));
@@ -112,31 +118,7 @@ Sysmon::Sysmon(QWidget *parent) :QWidget(parent), ui(new Ui::Sysmon)
     connect(ui->refreshButton , SIGNAL(released()), this, SLOT(refreshButtonHandler()));
 
 
-    /*
-    QStandardItem *currentPID, *pidCommand, *pidMemUsage;
-
-
-    QString myString = "";
-
-    int row = 0;
-
-
-    for (pid_t pid : procs){
-        get_proc_info(pid, &procInfo);
-
-        myString = QString::number(procInfo.pid);
-        currentPID = new QStandardItem(myString);
-        pidCommand = new QStandardItem(procInfo.exName);
-        pidMemUsage = new QStandardItem(QString::number(procInfo.vsize));
-
-        QStandardItem *myData[] = {currentPID, pidCommand, pidMemUsage};
-
-        PopulateTable(model,myData, row++);
-
-    }*/
-
     ui->tableView->setModel(model);
-
 
 }
 
@@ -156,16 +138,11 @@ void Sysmon::monitorButtonHandler(){
 }
 
 void Sysmon::refreshButtonHandler(){
-    cout << "DSA" << endl;
-
     procs = listDir("/proc/");
     GetAllProcsInfo(&procInfo, &procs, 0);
     Sysmon::Temp(model,procs);
-    ui->tableView->setModel(model);
-    //ui->tableView->setIte
-    ui->tableView->update();
 
-    cout << "SDA" << endl;
+    ui->tableView->setModel(model);
 }
 
 Sysmon::~Sysmon()
