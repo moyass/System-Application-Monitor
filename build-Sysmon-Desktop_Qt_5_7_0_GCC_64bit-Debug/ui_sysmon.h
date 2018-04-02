@@ -191,25 +191,14 @@ public:
         tableView = new QTableView(tab);
         tableView->setObjectName(QStringLiteral("tableView"));
         tableView->setEnabled(true);
-<<<<<<< HEAD
-        tableView->setGeometry(QRect(0, 40, 800, 391));
-        QSizePolicy sizePolicy1(QSizePolicy::Minimum, QSizePolicy::Fixed);
-        sizePolicy1.setHorizontalStretch(0);
-        sizePolicy1.setVerticalStretch(0);
-        sizePolicy1.setHeightForWidth(tableView->sizePolicy().hasHeightForWidth());
-        tableView->setSizePolicy(sizePolicy1);
-        tableView->setMinimumSize(QSize(800, 391));
-        tableView->setMaximumSize(QSize(406, 805));
-=======
         tableView->setGeometry(QRect(10, 20, 781, 391));
         QSizePolicy sizePolicy2(QSizePolicy::Minimum, QSizePolicy::Fixed);
         sizePolicy2.setHorizontalStretch(0);
         sizePolicy2.setVerticalStretch(0);
         sizePolicy2.setHeightForWidth(tableView->sizePolicy().hasHeightForWidth());
         tableView->setSizePolicy(sizePolicy2);
-        tableView->setMinimumSize(QSize(390, 391));
+        tableView->setMinimumSize(QSize(800, 391));
         tableView->setMaximumSize(QSize(16777215, 391));
->>>>>>> bed0cd665e18ed7182d4a3c72ed81d656fe2be77
         tableView->setSizeIncrement(QSize(0, 0));
         QFont font;
         font.setFamily(QStringLiteral("Sans Serif"));

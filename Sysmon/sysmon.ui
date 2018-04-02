@@ -74,17 +74,10 @@
     <widget class="QPushButton" name="refreshButton">
      <property name="geometry">
       <rect>
-<<<<<<< HEAD
-       <x>710</x>
-       <y>10</y>
-       <width>80</width>
-       <height>21</height>
-=======
        <x>599</x>
        <y>440</y>
        <width>81</width>
        <height>41</height>
->>>>>>> bed0cd665e18ed7182d4a3c72ed81d656fe2be77
       </rect>
      </property>
      <property name="text">
@@ -997,15 +990,9 @@
      </property>
      <property name="geometry">
       <rect>
-<<<<<<< HEAD
-       <x>0</x>
-       <y>40</y>
-       <width>800</width>
-=======
        <x>10</x>
        <y>20</y>
        <width>781</width>
->>>>>>> bed0cd665e18ed7182d4a3c72ed81d656fe2be77
        <height>391</height>
       </rect>
      </property>
@@ -1023,13 +1010,8 @@
      </property>
      <property name="maximumSize">
       <size>
-<<<<<<< HEAD
-       <width>406</width>
-       <height>805</height>
-=======
        <width>16777215</width>
        <height>391</height>
->>>>>>> bed0cd665e18ed7182d4a3c72ed81d656fe2be77
       </size>
      </property>
      <property name="sizeIncrement">
