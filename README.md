@@ -1,5 +1,6 @@
- # System-Application-Monitor
- COMP3000 - Final Project
+# System-Application-Monitor
+
+COMP3000 - Final Project
 
 ## BUILDING REQUIREMENTS
 #### libprocps
@@ -7,12 +8,17 @@
 
 ##### cpupower
 > sudo apt install cpupower <br>
-> sudo apt install linux-tools-generic
+<p>
+Please note, cpupower requires kernal specific packages.
+The following installations were used for kernel 4.13.0-38: </p>
+> sudo apt install linux-tools-4.13.0-38-generic
+> sudo apt install linux-cloud-tools-4.13.0-38-generic
 
 
 ## Background
 
-Using the Linux operating system, this utility offers a simple to use system monitor, that provides system information for temperatures of various hardware components. In addition, the software also the ability to detect memory leaks from running processes.
+Using the Linux operating system, this utility offers a simple to use system monitor, that provides system information for temperatures and frequencies of the cpu and its components. 
+In addition, the software also the ability to detect memory leaks from running processes.
 
 
 ## Motivation
@@ -25,5 +31,5 @@ Our goal is provide the user with a friendly graphical interface that allows the
 
 ## Authors
 
-* **Mohamad Yassine** - *Intial Work* - [Github Page](https://github.com/moyass)
-* **Tamara Alhajj** - *Intial Work* - [Github Page](https://github.com/TamaraAlhajj)
+* **Mohamad Yassine** [Github Page](https://github.com/moyass)
+* **Tamara Alhajj** [Github Page](https://github.com/TamaraAlhajj)

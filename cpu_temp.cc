@@ -10,7 +10,7 @@ using namespace std;
 
 int CoreTemp(){
 	string line;
-	FILE *fp = popen("cat /sys/class/hwmon/hwmon2/temp*_input", "r");
+	FILE *fp = popen("cat /sys/class/hwmon/hwmon1/temp*_input", "r");
 	char buffer[BUFSIZ];
 	int core_temp = 0; 
 	int number_of_cores = 0; 
@@ -52,7 +52,7 @@ int SocketTemp(){
 int PackageTemp(){
 	//pch_skylake
 	string line;
-	FILE *fp = popen("cat /sys/class/hwmon/hwmon1/temp*_input", "r");
+	FILE *fp = popen("cat /sys/class/hwmon/hwmon2/temp*_input", "r");
 	char buffer[BUFSIZ];
 	int pack_temp = 0; 
 	
@@ -70,7 +70,7 @@ int PackageTemp(){
 int MaxTemp(){
 
 	string line;
-	FILE *fp = popen("cat /sys/class/hwmon/hwmon2/temp*_crit", "r");
+	FILE *fp = popen("cat /sys/class/hwmon/hwmon1/temp*_crit", "r");
 	char buffer[BUFSIZ];
 	int core_temp = 0; 
 	int max_core_temp = 0;
