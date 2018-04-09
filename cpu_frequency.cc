@@ -21,9 +21,14 @@ cpupower frequency-set -g powersave \n\
 cpupower frequency-set -g performance \n\
 "
 
+//frequency file paths
+#define MAX "cat /sys/devices/system/cpu/cpufreq/policy0/cpuinfo_max_freq"
+#define MIN "cat /sys/devices/system/cpu/cpufreq/policy0/cpuinfo_min_freq"
+#define CURRENT "cat /sys/devices/system/cpu/cpufreq/policy*/scaling_cur_freq"
+
 int Max(){
 	string line;
-	FILE *fp = popen("cat /sys/devices/system/cpu/cpufreq/policy0/cpuinfo_max_freq", "r");
+	FILE *fp = popen(MAX, "r");
 	char buffer[BUFSIZ];
 	int max_freq = 0; 
 	
@@ -41,7 +46,7 @@ int Max(){
 
 int Min(){
 	string line;
-	FILE *fp = popen("cat /sys/devices/system/cpu/cpufreq/policy0/cpuinfo_min_freq", "r");
+	FILE *fp = popen(MIN, "r");
 	char buffer[BUFSIZ];
 	int min_freq = 0; 
 	
@@ -59,7 +64,7 @@ int Min(){
 
 int CurrentFreq(){
 	string line;
-	FILE *fp = popen("cat /sys/devices/system/cpu/cpufreq/policy*/scaling_cur_freq", "r");
+	FILE *fp = popen(CURRENT, "r");
 	char buffer[BUFSIZ];
 	int freq = 0; 
 	int number_of_cores = 0; 
