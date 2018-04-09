@@ -6,6 +6,7 @@
 #include <QTableWidget>
 #include <QStandardItemModel>
 #include <main.h>
+#include <qobject.h>
 #include "process.h"
 
 namespace Ui {
@@ -22,8 +23,7 @@ public:
     QStandardItemModel *model = new QStandardItemModel(2,3,this);
     std::vector<pid_t> procs;
     std::vector<Process> procDB;
-    bool INITIAL_START = true;
-
+    unsigned int INTERVAL_SECONDS = 1000;
     ~Sysmon();
 
 
@@ -36,6 +36,7 @@ public slots:
 
 private:
     Ui::Sysmon *ui;
+    QTimer *timer;
 
     //void Temp(QStandardItemModel *inputModel, std::vector<pid_t> procs);
     void PopulateTable(QStandardItemModel *inputModel,QStandardItem *data[], int row);

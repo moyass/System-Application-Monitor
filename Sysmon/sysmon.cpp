@@ -12,6 +12,8 @@
 #include <vector>
 #include <iomanip>
 #include <algorithm>
+#include <QTimer>
+#include <QObject>
 
 using namespace std;
 
@@ -112,8 +114,9 @@ void Sysmon::Temp(QStandardItemModel *inputModel, vector<pid_t> procs){
 
         for (Process &d: procDB){
             if(d.getPID() == procInfo.pid){
-
-                d.insert(RSS, procInfo.rss);
+                if(d.WithinRange(RSS, procInfo.rss)){
+                    d.insert(RSS, procInfo.rss);
+                }
                 d.insert(VM, procInfo.vsize);
                 FOUND = true;
                 cout << "Exists: " << d.getName() << endl;
@@ -168,6 +171,11 @@ Sysmon::Sysmon(QWidget *parent) :QWidget(parent), ui(new Ui::Sysmon)
 
 
     ui->tableView->setModel(model);
+
+    // Timer that refreshes the process table (vector) every INTERVAL_SECONDS
+    QTimer *timer = new QTimer(this);
+    QObject::connect(timer, SIGNAL(timeout()), this, SLOT(refreshButtonHandler()));
+    timer->start(INTERVAL_SECONDS); //time specified in ms
 
 
 }

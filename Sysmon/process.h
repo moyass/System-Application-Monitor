@@ -48,11 +48,30 @@ public:
         }
     }
 
+    bool WithinRange(MemType type, double value){
+        switch(type){
+            case RSS:
+                return range(currentRSS.back(), value);
+                break;
+            case VM:
+                for (double s: currentVM){
+                    cout << s << "," ;
+                }
+                break;
+            case SHR:
+                for (double s: currentSHR){
+                    cout << s << "," ;
+                }
+                break;
+        }
+    }
+
 
     int compare(MemType type, double value ){
-        // More work here
+        // Model the data points
         return 1;
     }
+
 
     void printOutValues(MemType type){
         switch(type){
@@ -74,7 +93,16 @@ public:
         }
     }
 
+
 private:
+
+    bool range(double oldValue, double newValue){
+        if((newValue / oldValue ) > 1)
+            return true;
+        else
+            return false;
+    }
+
     void resize(){
         // resize array once we are at max history
         // remove first 100 items and shift back
