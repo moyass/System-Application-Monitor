@@ -19,8 +19,8 @@
 
 QT_BEGIN_MOC_NAMESPACE
 struct qt_meta_stringdata_Sysmon_t {
-    QByteArrayData data[11];
-    char stringdata0[149];
+    QByteArrayData data[10];
+    char stringdata0[130];
 };
 #define QT_MOC_LITERAL(idx, ofs, len) \
     Q_STATIC_BYTE_ARRAY_DATA_HEADER_INITIALIZER_WITH_OFFSET(len, \
@@ -34,18 +34,17 @@ QT_MOC_LITERAL(1, 7, 18), // "aboutButtonHandler"
 QT_MOC_LITERAL(2, 26, 0), // ""
 QT_MOC_LITERAL(3, 27, 20), // "monitorButtonHandler"
 QT_MOC_LITERAL(4, 48, 20), // "refreshButtonHandler"
-QT_MOC_LITERAL(5, 69, 18), // "debugButtonHandler"
-QT_MOC_LITERAL(6, 88, 4), // "Temp"
-QT_MOC_LITERAL(7, 93, 19), // "QStandardItemModel*"
-QT_MOC_LITERAL(8, 113, 10), // "inputModel"
-QT_MOC_LITERAL(9, 124, 18), // "std::vector<pid_t>"
-QT_MOC_LITERAL(10, 143, 5) // "procs"
+QT_MOC_LITERAL(5, 69, 4), // "Temp"
+QT_MOC_LITERAL(6, 74, 19), // "QStandardItemModel*"
+QT_MOC_LITERAL(7, 94, 10), // "inputModel"
+QT_MOC_LITERAL(8, 105, 18), // "std::vector<pid_t>"
+QT_MOC_LITERAL(9, 124, 5) // "procs"
 
     },
     "Sysmon\0aboutButtonHandler\0\0"
     "monitorButtonHandler\0refreshButtonHandler\0"
-    "debugButtonHandler\0Temp\0QStandardItemModel*\0"
-    "inputModel\0std::vector<pid_t>\0procs"
+    "Temp\0QStandardItemModel*\0inputModel\0"
+    "std::vector<pid_t>\0procs"
 };
 #undef QT_MOC_LITERAL
 
@@ -55,7 +54,7 @@ static const uint qt_meta_data_Sysmon[] = {
        7,       // revision
        0,       // classname
        0,    0, // classinfo
-       5,   14, // methods
+       4,   14, // methods
        0,    0, // properties
        0,    0, // enums/sets
        0,    0, // constructors
@@ -63,18 +62,16 @@ static const uint qt_meta_data_Sysmon[] = {
        0,       // signalCount
 
  // slots: name, argc, parameters, tag, flags
-       1,    0,   39,    2, 0x0a /* Public */,
-       3,    0,   40,    2, 0x0a /* Public */,
-       4,    0,   41,    2, 0x0a /* Public */,
-       5,    0,   42,    2, 0x0a /* Public */,
-       6,    2,   43,    2, 0x0a /* Public */,
+       1,    0,   34,    2, 0x0a /* Public */,
+       3,    0,   35,    2, 0x0a /* Public */,
+       4,    0,   36,    2, 0x0a /* Public */,
+       5,    2,   37,    2, 0x0a /* Public */,
 
  // slots: parameters
     QMetaType::Void,
     QMetaType::Void,
     QMetaType::Void,
-    QMetaType::Void,
-    QMetaType::Void, 0x80000000 | 7, 0x80000000 | 9,    8,   10,
+    QMetaType::Void, 0x80000000 | 6, 0x80000000 | 8,    7,    9,
 
        0        // eod
 };
@@ -88,14 +85,13 @@ void Sysmon::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, void
         case 0: _t->aboutButtonHandler(); break;
         case 1: _t->monitorButtonHandler(); break;
         case 2: _t->refreshButtonHandler(); break;
-        case 3: _t->debugButtonHandler(); break;
-        case 4: _t->Temp((*reinterpret_cast< QStandardItemModel*(*)>(_a[1])),(*reinterpret_cast< std::vector<pid_t>(*)>(_a[2]))); break;
+        case 3: _t->Temp((*reinterpret_cast< QStandardItemModel*(*)>(_a[1])),(*reinterpret_cast< std::vector<pid_t>(*)>(_a[2]))); break;
         default: ;
         }
     } else if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
         switch (_id) {
         default: *reinterpret_cast<int*>(_a[0]) = -1; break;
-        case 4:
+        case 3:
             switch (*reinterpret_cast<int*>(_a[1])) {
             default: *reinterpret_cast<int*>(_a[0]) = -1; break;
             case 0:
@@ -131,13 +127,13 @@ int Sysmon::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
     if (_id < 0)
         return _id;
     if (_c == QMetaObject::InvokeMetaMethod) {
-        if (_id < 5)
+        if (_id < 4)
             qt_static_metacall(this, _c, _id, _a);
-        _id -= 5;
+        _id -= 4;
     } else if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
-        if (_id < 5)
+        if (_id < 4)
             qt_static_metacall(this, _c, _id, _a);
-        _id -= 5;
+        _id -= 4;
     }
     return _id;
 }

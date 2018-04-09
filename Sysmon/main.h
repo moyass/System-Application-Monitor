@@ -14,6 +14,8 @@
 #include <dirent.h>
 #include <vector>
 #include <proc/readproc.h>
+#include <sys/types.h>
+#include <signal.h>
 
 
 

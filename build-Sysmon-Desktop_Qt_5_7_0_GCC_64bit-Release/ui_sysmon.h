@@ -19,7 +19,6 @@
 #include <QtWidgets/QPushButton>
 #include <QtWidgets/QTabWidget>
 #include <QtWidgets/QTableView>
-#include <QtWidgets/QToolButton>
 #include <QtWidgets/QWidget>
 
 QT_BEGIN_NAMESPACE
@@ -35,7 +34,6 @@ public:
     QPushButton *monitorButton;
     QFrame *line;
     QTableView *tableView;
-    QToolButton *toolButton;
     QWidget *tab_2;
     QLabel *label;
 
@@ -224,9 +222,6 @@ public:
         tableView->verticalHeader()->setCascadingSectionResizes(false);
         tableView->verticalHeader()->setDefaultSectionSize(30);
         tableView->verticalHeader()->setMinimumSectionSize(30);
-        toolButton = new QToolButton(tab);
-        toolButton->setObjectName(QStringLiteral("toolButton"));
-        toolButton->setGeometry(QRect(770, 0, 21, 16));
         tabWidget->addTab(tab, QString());
         tab_2 = new QWidget();
         tab_2->setObjectName(QStringLiteral("tab_2"));
@@ -252,7 +247,6 @@ public:
         label_3->setText(QApplication::translate("Sysmon", "Currently No Process Seems to have a memory leak", 0));
         aboutButton->setText(QApplication::translate("Sysmon", "About", 0));
         monitorButton->setText(QApplication::translate("Sysmon", "Monitor", 0));
-        toolButton->setText(QApplication::translate("Sysmon", "...", 0));
         tabWidget->setTabText(tabWidget->indexOf(tab), QApplication::translate("Sysmon", "Processess", 0));
         label->setText(QApplication::translate("Sysmon", "Temperature and Shit", 0));
         tabWidget->setTabText(tabWidget->indexOf(tab_2), QApplication::translate("Sysmon", "Hardware Info", 0));

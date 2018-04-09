@@ -3,6 +3,7 @@
 
 #include <string.h>
 #include <iostream>
+#include <chrono>
 #include "main.h"
 
 #define MAX_HISTORY 1000
@@ -17,6 +18,7 @@ class Process  {
     vector<double> currentRSS;
     vector<double> currentVM;
     vector<double> currentSHR;
+
 
 public:
     void setName (string name){
@@ -50,6 +52,9 @@ public:
 
     bool WithinRange(MemType type, double value){
         switch(type){
+            case PID:
+                cout << currentPID << endl;
+                break;
             case RSS:
                 return range(currentRSS.back(), value);
                 break;
@@ -66,15 +71,34 @@ public:
         }
     }
 
+    void model(){
+        // Model the data points
+        // Last 3 values of currentRSS
+        double sigma = 0;
+        double average = 0;
+
+        for (double element: currentRSS)
+            sigma += element;
+
+
+        average = sigma / currentRSS.size();
+
+        if ((currentRSS.back() / average) > 1.5){
+            cout << "The average is "<< average << " for " << processName << " and current is " << currentRSS.back() << endl;
+        }
+    }
 
     int compare(MemType type, double value ){
-        // Model the data points
+
         return 1;
     }
 
 
     void printOutValues(MemType type){
         switch(type){
+            case PID:
+                cout << currentPID << endl;
+                break;
             case RSS:
                 for (double s: currentRSS){
                     cout << s << "," ;

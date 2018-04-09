@@ -69,7 +69,7 @@ void Sysmon::Temp(QStandardItemModel *inputModel, vector<pid_t> procs){
 
     QStandardItem *currentPID, *pidCommand, *pidMemUsage, *pidRssSize, *pidState;
     QString myString = "";
-    int row = 0, index = 0;
+    int row = 0;
     bool FOUND = false;
 
 
@@ -119,6 +119,7 @@ void Sysmon::Temp(QStandardItemModel *inputModel, vector<pid_t> procs){
                 }
                 d.insert(VM, procInfo.vsize);
                 FOUND = true;
+                if(DEBUG_MODE)
                 cout << "Exists: " << d.getName() << endl;
                 break;
             } else {
@@ -166,17 +167,10 @@ Sysmon::Sysmon(QWidget *parent) :QWidget(parent), ui(new Ui::Sysmon)
     connect(ui->aboutButton   , SIGNAL(released()), this, SLOT(aboutButtonHandler()));
     connect(ui->monitorButton , SIGNAL(released()), this, SLOT(monitorButtonHandler()));
     connect(ui->refreshButton , SIGNAL(released()), this, SLOT(refreshButtonHandler()));
-
-
+    connect(ui->toolButton    , SIGNAL(released()), this, SLOT(debugButtonHandler()));
 
 
     ui->tableView->setModel(model);
-
-    // Timer that refreshes the process table (vector) every INTERVAL_SECONDS
-    QTimer *timer = new QTimer(this);
-    QObject::connect(timer, SIGNAL(timeout()), this, SLOT(refreshButtonHandler()));
-    timer->start(INTERVAL_SECONDS); //time specified in ms
-
 
 }
 
@@ -190,9 +184,27 @@ void Sysmon::aboutButtonHandler(){
 }
 
 void Sysmon::monitorButtonHandler(){
+    QDialog dialog;
     QMessageBox msgBox;
     msgBox.setText("The proccess monitoring system has started. To turn it off press 'Monitor' once more");
     msgBox.exec();
+
+    // Timer that refreshes the process table (vector) every INTERVAL_SECONDS
+
+    QObject::connect(timer, SIGNAL(timeout()), this, SLOT(refreshButtonHandler()));
+    if(!timer->isActive()){
+        timer->start(INTERVAL_SECONDS); //time specified in ms
+        cout << "Constant monitoring has started" << endl;
+    }else{
+        timer->stop(); // stop the timer
+        cout << "Constant monitoring has been stopped" << endl;
+    }
+
+}
+
+void Sysmon::debugButtonHandler(){
+    if(DEBUG_MODE) DEBUG_MODE = false;
+    else DEBUG_MODE = true;
 }
 
 void Sysmon::refreshButtonHandler(){
@@ -203,16 +215,22 @@ void Sysmon::refreshButtonHandler(){
     ui->tableView->setModel(model);
 
     for (Process s : procDB){
-        //if (s.getName().compare("a.out") == 0){
-                cout << endl << s.getName() << endl;
-                s.printOutValues(RSS);
-        //}
+       // Check if process is still running or not
+       if (!kill(s.getPID(),0))
+        s.model();
     }
 
-    Process temp;
-    cout << endl;
-    cout << "Size of DB (bytes): " << sizeof(temp) << endl;
-    cout << "Size of DB: " << procDB.size() * sizeof(Process) << endl;
+    if (DEBUG_MODE){
+        for (Process s : procDB){
+
+            cout << endl << s.getName() << endl;
+            s.printOutValues(RSS);
+        }
+
+        cout << endl;
+        cout << "Size of DB (bytes): " << sizeof(Process) << endl;
+        cout << "Size of DB: " << procDB.size() * sizeof(Process) << endl;
+    }
 
 }
 

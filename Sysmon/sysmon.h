@@ -7,6 +7,7 @@
 #include <QStandardItemModel>
 #include <main.h>
 #include <qobject.h>
+#include <QTimer>
 #include "process.h"
 
 namespace Ui {
@@ -24,6 +25,8 @@ public:
     std::vector<pid_t> procs;
     std::vector<Process> procDB;
     unsigned int INTERVAL_SECONDS = 1000;
+    bool DEBUG_MODE = false;
+
     ~Sysmon();
 
 
@@ -31,14 +34,13 @@ public slots:
         void aboutButtonHandler();
         void monitorButtonHandler();
         void refreshButtonHandler();
+        void debugButtonHandler();
         void Temp(QStandardItemModel *inputModel, std::vector<pid_t> procs);
 
 
 private:
     Ui::Sysmon *ui;
-    QTimer *timer;
-
-    //void Temp(QStandardItemModel *inputModel, std::vector<pid_t> procs);
+    QTimer *timer = new QTimer(this);
     void PopulateTable(QStandardItemModel *inputModel,QStandardItem *data[], int row);
     std::vector<pid_t> listDir(const std::string& path);
 

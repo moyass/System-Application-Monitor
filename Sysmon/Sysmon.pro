@@ -20,7 +20,10 @@ HEADERS  += sysmon.h \
     main.h \
     process.h
 
-FORMS    += sysmon.ui
+FORMS    += sysmon.ui \
+    dockwidget.ui
 
 LIBS += -lprocps
+
+DISTFILES +=
 
