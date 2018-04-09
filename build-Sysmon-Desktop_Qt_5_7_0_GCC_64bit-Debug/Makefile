@@ -209,7 +209,8 @@ DIST          = ../../../Qt5.7.0-2/5.7/gcc_64/mkspecs/features/spec_pre.prf \
 		../../../Qt5.7.0-2/5.7/gcc_64/mkspecs/features/yacc.prf \
 		../../../Qt5.7.0-2/5.7/gcc_64/mkspecs/features/lex.prf \
 		../Sysmon/Sysmon.pro ../Sysmon/sysmon.h \
-		../Sysmon/main.h ../Sysmon/main.cpp \
+		../Sysmon/main.h \
+		../Sysmon/process.h ../Sysmon/main.cpp \
 		../Sysmon/sysmon.cpp \
 		../Sysmon/get-proc-info.cpp
 QMAKE_TARGET  = Sysmon
@@ -552,7 +553,7 @@ dist: distdir FORCE
 distdir: FORCE
 	@test -d $(DISTDIR) || mkdir -p $(DISTDIR)
 	$(COPY_FILE) --parents $(DIST) $(DISTDIR)/
-	$(COPY_FILE) --parents ../Sysmon/sysmon.h ../Sysmon/main.h $(DISTDIR)/
+	$(COPY_FILE) --parents ../Sysmon/sysmon.h ../Sysmon/main.h ../Sysmon/process.h $(DISTDIR)/
 	$(COPY_FILE) --parents ../Sysmon/main.cpp ../Sysmon/sysmon.cpp ../Sysmon/get-proc-info.cpp $(DISTDIR)/
 	$(COPY_FILE) --parents ../Sysmon/sysmon.ui $(DISTDIR)/
 
@@ -706,6 +707,7 @@ moc_sysmon.cpp: ../../../Qt5.7.0-2/5.7/gcc_64/include/QtWidgets/QWidget \
 		../../../Qt5.7.0-2/5.7/gcc_64/include/QtGui/QStandardItemModel \
 		../../../Qt5.7.0-2/5.7/gcc_64/include/QtGui/qstandarditemmodel.h \
 		../Sysmon/main.h \
+		../Sysmon/process.h \
 		../Sysmon/sysmon.h \
 		../../../Qt5.7.0-2/5.7/gcc_64/bin/moc
 	/home/mohamad/Qt5.7.0-2/5.7/gcc_64/bin/moc $(DEFINES) -I/home/mohamad/Qt5.7.0-2/5.7/gcc_64/mkspecs/linux-g++ -I/home/mohamad/Work/System-Application-Monitor/Sysmon -I/home/mohamad/Qt5.7.0-2/5.7/gcc_64/include -I/home/mohamad/Qt5.7.0-2/5.7/gcc_64/include/QtWidgets -I/home/mohamad/Qt5.7.0-2/5.7/gcc_64/include/QtGui -I/home/mohamad/Qt5.7.0-2/5.7/gcc_64/include/QtCore -I. -I/usr/include/c++/5 -I/usr/include/x86_64-linux-gnu/c++/5 -I/usr/include/c++/5/backward -I/usr/lib/gcc/x86_64-linux-gnu/5/include -I/usr/local/include -I/usr/lib/gcc/x86_64-linux-gnu/5/include-fixed -I/usr/include/x86_64-linux-gnu -I/usr/include ../Sysmon/sysmon.h -o moc_sysmon.cpp
@@ -853,6 +855,7 @@ main.o: ../Sysmon/main.cpp ../Sysmon/sysmon.h \
 		../../../Qt5.7.0-2/5.7/gcc_64/include/QtGui/QStandardItemModel \
 		../../../Qt5.7.0-2/5.7/gcc_64/include/QtGui/qstandarditemmodel.h \
 		../Sysmon/main.h \
+		../Sysmon/process.h \
 		../../../Qt5.7.0-2/5.7/gcc_64/include/QtWidgets/QApplication \
 		../../../Qt5.7.0-2/5.7/gcc_64/include/QtWidgets/qapplication.h \
 		../../../Qt5.7.0-2/5.7/gcc_64/include/QtCore/qcoreapplication.h \
@@ -986,6 +989,7 @@ sysmon.o: ../Sysmon/sysmon.cpp ../Sysmon/sysmon.h \
 		../../../Qt5.7.0-2/5.7/gcc_64/include/QtGui/QStandardItemModel \
 		../../../Qt5.7.0-2/5.7/gcc_64/include/QtGui/qstandarditemmodel.h \
 		../Sysmon/main.h \
+		../Sysmon/process.h \
 		ui_sysmon.h \
 		../../../Qt5.7.0-2/5.7/gcc_64/include/QtCore/QVariant \
 		../../../Qt5.7.0-2/5.7/gcc_64/include/QtWidgets/QAction \
@@ -1005,6 +1009,7 @@ sysmon.o: ../Sysmon/sysmon.cpp ../Sysmon/sysmon.h \
 		../../../Qt5.7.0-2/5.7/gcc_64/include/QtWidgets/qheaderview.h \
 		../../../Qt5.7.0-2/5.7/gcc_64/include/QtWidgets/QLabel \
 		../../../Qt5.7.0-2/5.7/gcc_64/include/QtWidgets/qlabel.h \
+		../../../Qt5.7.0-2/5.7/gcc_64/include/QtWidgets/QTabWidget \
 		../../../Qt5.7.0-2/5.7/gcc_64/include/QtWidgets/QTableView \
 		../../../Qt5.7.0-2/5.7/gcc_64/include/QtWidgets/QDesktopWidget \
 		../../../Qt5.7.0-2/5.7/gcc_64/include/QtCore/QCoreApplication \

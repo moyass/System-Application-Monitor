@@ -1,6 +1,7 @@
 #include "sysmon.h"
 #include "ui_sysmon.h"
 #include "main.h"
+#include "process.h"
 #include <QApplication>
 #include <QDesktopWidget>
 #include <QCoreApplication>
@@ -10,6 +11,7 @@
 #include <string>
 #include <vector>
 #include <iomanip>
+#include <algorithm>
 
 using namespace std;
 
@@ -65,9 +67,13 @@ void Sysmon::Temp(QStandardItemModel *inputModel, vector<pid_t> procs){
 
     QStandardItem *currentPID, *pidCommand, *pidMemUsage, *pidRssSize, *pidState;
     QString myString = "";
-    int row = 0;
+    int row = 0, index = 0;
+    bool FOUND = false;
+
+
 
     for (pid_t pid : procs){
+        Process tempProcess;
         get_proc_info(pid, &procInfo);
 
         myString = QString(procInfo.state);
@@ -85,6 +91,43 @@ void Sysmon::Temp(QStandardItemModel *inputModel, vector<pid_t> procs){
         pidState    = new QStandardItem(myString);
 
 
+
+        // TODO: Fix up algorithm of storing the information
+        // TODO: If a process is closed, remove it from the vector
+
+        if (procDB.size() == 0) {
+            tempProcess.setName(procInfo.exName);
+            tempProcess.insert(PID, procInfo.pid);
+            tempProcess.insert(RSS, procInfo.rss);
+            tempProcess.insert(VM, procInfo.vsize);
+            procDB.push_back(tempProcess);
+            FOUND = true;
+        }
+
+        // Look for the process and make sure it is not already
+        // there. If the process is there already, just add to
+        // it's values vector
+        for (Process d: procDB){
+            if(d.getPID() == procInfo.pid){
+                d.insert(RSS, procInfo.rss);
+                d.insert(VM, procInfo.vsize);
+                FOUND = true;
+                break;
+            } else {
+                FOUND = false;
+            }
+        }
+
+        if(!FOUND){
+            tempProcess.setName(procInfo.exName);
+            tempProcess.insert(PID, procInfo.pid);
+            tempProcess.insert(RSS, procInfo.rss);
+            tempProcess.insert(VM, procInfo.vsize);
+            procDB.push_back(tempProcess);
+            FOUND = false;
+        }
+
+
         QStandardItem *myData[] = {pidState, currentPID, pidCommand, pidMemUsage, pidRssSize };
 
         PopulateTable(inputModel,myData, row++);
@@ -98,7 +141,6 @@ void Sysmon::PopulateTable(QStandardItemModel *inputModel,QStandardItem *data[],
     inputModel->setItem(row,2,data[2]);
     inputModel->setItem(row,3,data[3]);
     inputModel->setItem(row,4,data[4]);
-    //inputModel->setItem(row,5,data[5]);
 }
 
 Sysmon::Sysmon(QWidget *parent) :QWidget(parent), ui(new Ui::Sysmon)
@@ -112,13 +154,15 @@ Sysmon::Sysmon(QWidget *parent) :QWidget(parent), ui(new Ui::Sysmon)
 
     Sysmon::refreshButtonHandler();
 
-
     connect(ui->aboutButton   , SIGNAL(released()), this, SLOT(aboutButtonHandler()));
     connect(ui->monitorButton , SIGNAL(released()), this, SLOT(monitorButtonHandler()));
     connect(ui->refreshButton , SIGNAL(released()), this, SLOT(refreshButtonHandler()));
 
 
+
+
     ui->tableView->setModel(model);
+
 
 }
 
@@ -143,6 +187,19 @@ void Sysmon::refreshButtonHandler(){
     Sysmon::Temp(model,procs);
 
     ui->tableView->setModel(model);
+
+    for (Process s : procDB){
+       // if (s.getName().compare("Sysmon") == 0){
+                cout << endl << s.getName() << endl;
+                s.printOutValues(RSS);
+       // }
+    }
+
+    Process temp;
+    cout << endl;
+    cout << "Size of DB (bytes): " << sizeof(temp) << endl;
+    cout << "Size of DB: " << procDB.size() * sizeof(Process) << endl;
+
 }
 
 Sysmon::~Sysmon()

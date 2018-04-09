@@ -17,7 +17,8 @@ SOURCES += main.cpp\
     get-proc-info.cpp
 
 HEADERS  += sysmon.h \
-    main.h
+    main.h \
+    process.h
 
 FORMS    += sysmon.ui
 

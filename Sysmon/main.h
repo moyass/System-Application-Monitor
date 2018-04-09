@@ -15,6 +15,8 @@
 #include <vector>
 #include <proc/readproc.h>
 
+
+
 typedef struct MemoryHistory {
   /* Delta between multiple memory usages */
   int old = 0;
@@ -74,6 +76,11 @@ typedef struct statusstruct_proc {
   char          exName [_POSIX_PATH_MAX]; /** The filename of the executable **/
   unsigned int  rssAnon;
 } procInfoStatus;
+
+enum MemType {
+    RSS,VM,SHR, PID
+};
+
 
 int get_proc_info(pid_t pid, procinfo * pinfo);
 

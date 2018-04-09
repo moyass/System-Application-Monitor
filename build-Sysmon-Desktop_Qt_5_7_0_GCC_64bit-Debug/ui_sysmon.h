@@ -61,6 +61,7 @@ public:
         sizePolicy1.setHeightForWidth(tabWidget->sizePolicy().hasHeightForWidth());
         tabWidget->setSizePolicy(sizePolicy1);
         tabWidget->setMaximumSize(QSize(805, 521));
+        tabWidget->setTabPosition(QTabWidget::North);
         tab = new QWidget();
         tab->setObjectName(QStringLiteral("tab"));
         refreshButton = new QPushButton(tab);

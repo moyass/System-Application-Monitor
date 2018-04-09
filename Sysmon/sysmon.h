@@ -6,6 +6,7 @@
 #include <QTableWidget>
 #include <QStandardItemModel>
 #include <main.h>
+#include "process.h"
 
 namespace Ui {
 class Sysmon;
@@ -20,6 +21,9 @@ public:
     procinfo procInfo;
     QStandardItemModel *model = new QStandardItemModel(2,3,this);
     std::vector<pid_t> procs;
+    std::vector<Process> procDB;
+    bool INITIAL_START = true;
+
     ~Sysmon();
 
 
