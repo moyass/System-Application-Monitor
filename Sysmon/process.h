@@ -13,28 +13,12 @@ class Process  {
 
     string processName = "";
     pid_t currentPID = 0;
+
     vector<double> currentRSS;
     vector<double> currentVM;
     vector<double> currentSHR;
 
-
-
-    int indexRSS = 0;
-    int indexVM = 0;
-    int indexShr = 0;
-
 public:
-    Process(){
-        processName = "";
-        currentPID = 0;
-        indexRSS = 0;
-        indexVM = 0;
-        indexShr = 0;
-
-        currentRSS.clear();
-        currentVM.clear();
-        currentSHR.clear();
-    }
     void setName (string name){
         processName = name;
     }

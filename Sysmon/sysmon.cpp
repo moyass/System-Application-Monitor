@@ -95,6 +95,8 @@ void Sysmon::Temp(QStandardItemModel *inputModel, vector<pid_t> procs){
         // TODO: Fix up algorithm of storing the information
         // TODO: If a process is closed, remove it from the vector
 
+        // LOGIC:
+
         if (procDB.size() == 0) {
             tempProcess.setName(procInfo.exName);
             tempProcess.insert(PID, procInfo.pid);
@@ -107,17 +109,21 @@ void Sysmon::Temp(QStandardItemModel *inputModel, vector<pid_t> procs){
         // Look for the process and make sure it is not already
         // there. If the process is there already, just add to
         // it's values vector
-        for (Process d: procDB){
+
+        for (Process &d: procDB){
             if(d.getPID() == procInfo.pid){
+
                 d.insert(RSS, procInfo.rss);
                 d.insert(VM, procInfo.vsize);
                 FOUND = true;
+                cout << "Exists: " << d.getName() << endl;
                 break;
             } else {
                 FOUND = false;
             }
         }
 
+        // If not found
         if(!FOUND){
             tempProcess.setName(procInfo.exName);
             tempProcess.insert(PID, procInfo.pid);
@@ -189,10 +195,10 @@ void Sysmon::refreshButtonHandler(){
     ui->tableView->setModel(model);
 
     for (Process s : procDB){
-       // if (s.getName().compare("Sysmon") == 0){
+        //if (s.getName().compare("a.out") == 0){
                 cout << endl << s.getName() << endl;
                 s.printOutValues(RSS);
-       // }
+        //}
     }
 
     Process temp;
