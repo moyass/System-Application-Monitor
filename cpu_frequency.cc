@@ -67,8 +67,8 @@ int CurrentFreq(){
 	
 	while ( fgets( buffer, BUFSIZ, fp ) != NULL ) {
 
-	  stringstream current_temp(buffer);
-	  current_temp >> freq;
+	  stringstream current(buffer);
+	  current >> freq;
 	  average_freq += freq;
 	  number_of_cores++;
 
