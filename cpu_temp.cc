@@ -7,10 +7,15 @@
 #include <iomanip>
 using namespace std;
 
+//temperature file paths
+#define SOCKET "cat /sys/class/hwmon/hwmon0/temp*_input"
+#define CORE "cat /sys/class/hwmon/hwmon1/temp*_input"
+#define PACKAGE "cat /sys/class/hwmon/hwmon2/temp*_input"
+#define MAX "cat /sys/class/hwmon/hwmon1/temp*_crit"
 
 int CoreTemp(){
 	string line;
-	FILE *fp = popen("cat /sys/class/hwmon/hwmon2/temp*_input", "r");
+	FILE *fp = popen(CORE, "r");
 	char buffer[BUFSIZ];
 	int core_temp = 0; 
 	int number_of_cores = 0; 
@@ -33,7 +38,7 @@ int CoreTemp(){
 int SocketTemp(){
 	//acpitz
 	string line;
-	FILE *fp = popen("cat /sys/class/hwmon/hwmon0/temp*_input", "r");
+	FILE *fp = popen(SOCKET, "r");
 	char buffer[BUFSIZ];
 	int socket_temp = 0; 
 	
@@ -52,7 +57,7 @@ int SocketTemp(){
 int PackageTemp(){
 	//pch_skylake
 	string line;
-	FILE *fp = popen("cat /sys/class/hwmon/hwmon1/temp*_input", "r");
+	FILE *fp = popen(PACKAGE, "r");
 	char buffer[BUFSIZ];
 	int pack_temp = 0; 
 	
@@ -70,7 +75,7 @@ int PackageTemp(){
 int MaxTemp(){
 
 	string line;
-	FILE *fp = popen("cat /sys/class/hwmon/hwmon2/temp*_crit", "r");
+	FILE *fp = popen(MAX, "r");
 	char buffer[BUFSIZ];
 	int core_temp = 0; 
 	int max_core_temp = 0;
