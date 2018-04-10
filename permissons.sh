@@ -3,5 +3,5 @@
 sudo su <<HERE
 ./freq
 ./temp
-exec ./bat
+./bat
 HERE

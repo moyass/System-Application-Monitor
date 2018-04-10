@@ -86,7 +86,7 @@ int ChargeInfo(){
 }
 
 int BatteryLow(){
-	int low = ChargeInfo()/40;
+	int low = ChargeInfo()/85;
 	if(ChargeInfo() <= low){
 		return 1;
 	}
