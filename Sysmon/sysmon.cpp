@@ -14,6 +14,7 @@
 #include <algorithm>
 #include <QTimer>
 #include <QObject>
+#include <QtCharts>
 
 using namespace std;
 
@@ -153,6 +154,27 @@ void Sysmon::PopulateTable(QStandardItemModel *inputModel,QStandardItem *data[],
     inputModel->setItem(row,4,data[4]);
 }
 
+void Sysmon::fetch () {
+  qDebug() << "Something was clicked!";
+  QObject *s = sender();
+  qDebug() << s->objectName();
+}
+
+void Sysmon :: OnDoubleClicked ( const  QModelIndex  & index )
+{
+   //QString a = ( index.model()-> data ( index.model() -> index ( index. row ( ) , index. column ( ) ) ) . toString ( ) ) ;
+   QString pid =  index.model()->data(index.model()->index(index.row(), 1)).toString();
+   for (Process s : procDB){
+       if(s.getPID() == pid.toInt(NULL,10)){
+        Sysmon::ClickOnProcess(s);
+        break;
+       }
+   }
+
+   cout << pid.toStdString() << endl;
+
+}
+
 Sysmon::Sysmon(QWidget *parent) :QWidget(parent), ui(new Ui::Sysmon)
 {
     ui->setupUi(this);
@@ -169,10 +191,11 @@ Sysmon::Sysmon(QWidget *parent) :QWidget(parent), ui(new Ui::Sysmon)
     connect(ui->refreshButton , SIGNAL(released()), this, SLOT(refreshButtonHandler()));
     connect(ui->toolButton    , SIGNAL(released()), this, SLOT(debugButtonHandler()));
 
-
     ui->tableView->setModel(model);
+    connect(ui->tableView, SIGNAL(doubleClicked(QModelIndex)), this, SLOT(OnDoubleClicked(QModelIndex)));
 
 }
+
 
 void Sysmon::aboutButtonHandler(){
 
@@ -181,6 +204,34 @@ void Sysmon::aboutButtonHandler(){
         tr("About"),
         tr("System Monitor by\nMohamad Yassine & Tamara Alhajj\nAlso this is the earf"));
 
+}
+
+void Sysmon::ClickOnProcess(Process input){
+    using namespace QtCharts;
+    int counter = 0;
+    QString appName = QString::fromStdString(input.getName());
+
+    QLineSeries *series = new QLineSeries();
+
+    for (double s : input.getVector()){
+        series->append(counter++, s);
+        *series << QPointF(counter++, s);
+
+    }
+
+    QChart *chart = new QChart();
+    chart->legend()->hide();
+    chart->addSeries(series);
+    chart->createDefaultAxes();
+    chart->setTitle(appName);
+
+    QChartView *chartView = new QChartView(chart);
+
+    chartView->setRenderHint(QPainter::Antialiasing);
+    chartView->setGeometry(100,200,400,400);
+    chartView->activateWindow();
+    chartView->raise();
+    chartView->show();
 }
 
 void Sysmon::monitorButtonHandler(){
@@ -216,13 +267,16 @@ void Sysmon::refreshButtonHandler(){
 
     for (Process s : procDB){
        // Check if process is still running or not
-       if (!kill(s.getPID(),0))
+       if (!kill(s.getPID(),0)){
+        s.FLAG=true;
         s.model();
+        s.FLAG=false;
+       }
+
     }
 
     if (DEBUG_MODE){
         for (Process s : procDB){
-
             cout << endl << s.getName() << endl;
             s.printOutValues(RSS);
         }

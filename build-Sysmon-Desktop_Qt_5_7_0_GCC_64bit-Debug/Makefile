@@ -12,10 +12,10 @@ MAKEFILE      = Makefile
 
 CC            = gcc
 CXX           = g++
-DEFINES       = -DQT_QML_DEBUG -DQT_WIDGETS_LIB -DQT_GUI_LIB -DQT_CORE_LIB
+DEFINES       = -DQT_QML_DEBUG -DQT_CHARTS_LIB -DQT_WIDGETS_LIB -DQT_GUI_LIB -DQT_CORE_LIB
 CFLAGS        = -pipe -g -Wall -W -D_REENTRANT -fPIC $(DEFINES)
 CXXFLAGS      = -pipe -g -std=gnu++11 -Wall -W -D_REENTRANT -fPIC $(DEFINES)
-INCPATH       = -I../Sysmon -I. -I../../../Qt5.7.0-2/5.7/gcc_64/include -I../../../Qt5.7.0-2/5.7/gcc_64/include/QtWidgets -I../../../Qt5.7.0-2/5.7/gcc_64/include/QtGui -I../../../Qt5.7.0-2/5.7/gcc_64/include/QtCore -I. -I. -I../../../Qt5.7.0-2/5.7/gcc_64/mkspecs/linux-g++
+INCPATH       = -I../Sysmon -I. -I../../../Qt5.7.0-2/5.7/gcc_64/include -I../../../Qt5.7.0-2/5.7/gcc_64/include/QtCharts -I../../../Qt5.7.0-2/5.7/gcc_64/include/QtWidgets -I../../../Qt5.7.0-2/5.7/gcc_64/include/QtGui -I../../../Qt5.7.0-2/5.7/gcc_64/include/QtCore -I. -I. -I../../../Qt5.7.0-2/5.7/gcc_64/mkspecs/linux-g++
 QMAKE         = /home/mohamad/Qt5.7.0-2/5.7/gcc_64/bin/qmake
 DEL_FILE      = rm -f
 CHK_DIR_EXISTS= test -d
@@ -36,7 +36,7 @@ DISTNAME      = Sysmon1.0.0
 DISTDIR = /home/mohamad/Work/System-Application-Monitor/build-Sysmon-Desktop_Qt_5_7_0_GCC_64bit-Debug/.tmp/Sysmon1.0.0
 LINK          = g++
 LFLAGS        = -Wl,-rpath,/home/mohamad/Qt5.7.0-2/5.7/gcc_64/lib
-LIBS          = $(SUBLIBS) -lprocps -L/home/mohamad/Qt5.7.0-2/5.7/gcc_64/lib -lQt5Widgets -L/usr/lib64 -lQt5Gui -lQt5Core -lGL -lpthread 
+LIBS          = $(SUBLIBS) -lprocps -L/home/mohamad/Qt5.7.0-2/5.7/gcc_64/lib -lQt5Charts -L/usr/lib64 -lQt5Widgets -lQt5Gui -lQt5Core -lGL -lpthread 
 AR            = ar cqs
 RANLIB        = 
 SED           = sed
@@ -378,6 +378,7 @@ Makefile: ../Sysmon/Sysmon.pro ../../../Qt5.7.0-2/5.7/gcc_64/mkspecs/linux-g++/q
 		../../../Qt5.7.0-2/5.7/gcc_64/mkspecs/features/yacc.prf \
 		../../../Qt5.7.0-2/5.7/gcc_64/mkspecs/features/lex.prf \
 		../Sysmon/Sysmon.pro \
+		../../../Qt5.7.0-2/5.7/gcc_64/lib/libQt5Charts.prl \
 		../../../Qt5.7.0-2/5.7/gcc_64/lib/libQt5Widgets.prl \
 		../../../Qt5.7.0-2/5.7/gcc_64/lib/libQt5Gui.prl \
 		../../../Qt5.7.0-2/5.7/gcc_64/lib/libQt5Core.prl
@@ -536,6 +537,7 @@ Makefile: ../Sysmon/Sysmon.pro ../../../Qt5.7.0-2/5.7/gcc_64/mkspecs/linux-g++/q
 ../../../Qt5.7.0-2/5.7/gcc_64/mkspecs/features/yacc.prf:
 ../../../Qt5.7.0-2/5.7/gcc_64/mkspecs/features/lex.prf:
 ../Sysmon/Sysmon.pro:
+../../../Qt5.7.0-2/5.7/gcc_64/lib/libQt5Charts.prl:
 ../../../Qt5.7.0-2/5.7/gcc_64/lib/libQt5Widgets.prl:
 ../../../Qt5.7.0-2/5.7/gcc_64/lib/libQt5Gui.prl:
 ../../../Qt5.7.0-2/5.7/gcc_64/lib/libQt5Core.prl:
@@ -707,10 +709,14 @@ moc_sysmon.cpp: ../../../Qt5.7.0-2/5.7/gcc_64/include/QtWidgets/QWidget \
 		../../../Qt5.7.0-2/5.7/gcc_64/include/QtGui/QStandardItemModel \
 		../../../Qt5.7.0-2/5.7/gcc_64/include/QtGui/qstandarditemmodel.h \
 		../Sysmon/main.h \
+		../../../Qt5.7.0-2/5.7/gcc_64/include/QtCore/QTimer \
+		../../../Qt5.7.0-2/5.7/gcc_64/include/QtCore/qtimer.h \
+		../../../Qt5.7.0-2/5.7/gcc_64/include/QtCore/qbasictimer.h \
 		../Sysmon/process.h \
+		../../../Qt5.7.0-2/5.7/gcc_64/include/QtCore/QString \
 		../Sysmon/sysmon.h \
 		../../../Qt5.7.0-2/5.7/gcc_64/bin/moc
-	/home/mohamad/Qt5.7.0-2/5.7/gcc_64/bin/moc $(DEFINES) -I/home/mohamad/Qt5.7.0-2/5.7/gcc_64/mkspecs/linux-g++ -I/home/mohamad/Work/System-Application-Monitor/Sysmon -I/home/mohamad/Qt5.7.0-2/5.7/gcc_64/include -I/home/mohamad/Qt5.7.0-2/5.7/gcc_64/include/QtWidgets -I/home/mohamad/Qt5.7.0-2/5.7/gcc_64/include/QtGui -I/home/mohamad/Qt5.7.0-2/5.7/gcc_64/include/QtCore -I. -I/usr/include/c++/5 -I/usr/include/x86_64-linux-gnu/c++/5 -I/usr/include/c++/5/backward -I/usr/lib/gcc/x86_64-linux-gnu/5/include -I/usr/local/include -I/usr/lib/gcc/x86_64-linux-gnu/5/include-fixed -I/usr/include/x86_64-linux-gnu -I/usr/include ../Sysmon/sysmon.h -o moc_sysmon.cpp
+	/home/mohamad/Qt5.7.0-2/5.7/gcc_64/bin/moc $(DEFINES) -I/home/mohamad/Qt5.7.0-2/5.7/gcc_64/mkspecs/linux-g++ -I/home/mohamad/Work/System-Application-Monitor/Sysmon -I/home/mohamad/Qt5.7.0-2/5.7/gcc_64/include -I/home/mohamad/Qt5.7.0-2/5.7/gcc_64/include/QtCharts -I/home/mohamad/Qt5.7.0-2/5.7/gcc_64/include/QtWidgets -I/home/mohamad/Qt5.7.0-2/5.7/gcc_64/include/QtGui -I/home/mohamad/Qt5.7.0-2/5.7/gcc_64/include/QtCore -I. -I/usr/include/c++/5 -I/usr/include/x86_64-linux-gnu/c++/5 -I/usr/include/c++/5/backward -I/usr/lib/gcc/x86_64-linux-gnu/5/include -I/usr/local/include -I/usr/lib/gcc/x86_64-linux-gnu/5/include-fixed -I/usr/include/x86_64-linux-gnu -I/usr/include ../Sysmon/sysmon.h -o moc_sysmon.cpp
 
 compiler_moc_source_make_all:
 compiler_moc_source_clean:
@@ -859,7 +865,11 @@ main.o: ../Sysmon/main.cpp ../Sysmon/sysmon.h \
 		../../../Qt5.7.0-2/5.7/gcc_64/include/QtGui/QStandardItemModel \
 		../../../Qt5.7.0-2/5.7/gcc_64/include/QtGui/qstandarditemmodel.h \
 		../Sysmon/main.h \
+		../../../Qt5.7.0-2/5.7/gcc_64/include/QtCore/QTimer \
+		../../../Qt5.7.0-2/5.7/gcc_64/include/QtCore/qtimer.h \
+		../../../Qt5.7.0-2/5.7/gcc_64/include/QtCore/qbasictimer.h \
 		../Sysmon/process.h \
+		../../../Qt5.7.0-2/5.7/gcc_64/include/QtCore/QString \
 		../../../Qt5.7.0-2/5.7/gcc_64/include/QtWidgets/QApplication \
 		../../../Qt5.7.0-2/5.7/gcc_64/include/QtWidgets/qapplication.h \
 		../../../Qt5.7.0-2/5.7/gcc_64/include/QtCore/qcoreapplication.h \
@@ -993,7 +1003,11 @@ sysmon.o: ../Sysmon/sysmon.cpp ../Sysmon/sysmon.h \
 		../../../Qt5.7.0-2/5.7/gcc_64/include/QtGui/QStandardItemModel \
 		../../../Qt5.7.0-2/5.7/gcc_64/include/QtGui/qstandarditemmodel.h \
 		../Sysmon/main.h \
+		../../../Qt5.7.0-2/5.7/gcc_64/include/QtCore/QTimer \
+		../../../Qt5.7.0-2/5.7/gcc_64/include/QtCore/qtimer.h \
+		../../../Qt5.7.0-2/5.7/gcc_64/include/QtCore/qbasictimer.h \
 		../Sysmon/process.h \
+		../../../Qt5.7.0-2/5.7/gcc_64/include/QtCore/QString \
 		ui_sysmon.h \
 		../../../Qt5.7.0-2/5.7/gcc_64/include/QtCore/QVariant \
 		../../../Qt5.7.0-2/5.7/gcc_64/include/QtWidgets/QAction \
@@ -1015,14 +1029,13 @@ sysmon.o: ../Sysmon/sysmon.cpp ../Sysmon/sysmon.h \
 		../../../Qt5.7.0-2/5.7/gcc_64/include/QtWidgets/qlabel.h \
 		../../../Qt5.7.0-2/5.7/gcc_64/include/QtWidgets/QTabWidget \
 		../../../Qt5.7.0-2/5.7/gcc_64/include/QtWidgets/QTableView \
+		../../../Qt5.7.0-2/5.7/gcc_64/include/QtWidgets/QToolButton \
+		../../../Qt5.7.0-2/5.7/gcc_64/include/QtWidgets/qtoolbutton.h \
 		../../../Qt5.7.0-2/5.7/gcc_64/include/QtWidgets/QDesktopWidget \
 		../../../Qt5.7.0-2/5.7/gcc_64/include/QtCore/QCoreApplication \
 		../../../Qt5.7.0-2/5.7/gcc_64/include/QtWidgets/QMessageBox \
 		../../../Qt5.7.0-2/5.7/gcc_64/include/QtWidgets/qmessagebox.h \
 		../../../Qt5.7.0-2/5.7/gcc_64/include/QtWidgets/qdialog.h \
-		../../../Qt5.7.0-2/5.7/gcc_64/include/QtCore/QTimer \
-		../../../Qt5.7.0-2/5.7/gcc_64/include/QtCore/qtimer.h \
-		../../../Qt5.7.0-2/5.7/gcc_64/include/QtCore/qbasictimer.h \
 		../../../Qt5.7.0-2/5.7/gcc_64/include/QtCore/QObject
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o sysmon.o ../Sysmon/sysmon.cpp
 

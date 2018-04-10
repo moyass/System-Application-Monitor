@@ -26,7 +26,7 @@ public:
     std::vector<Process> procDB;
     unsigned int INTERVAL_SECONDS = 1000;
     bool DEBUG_MODE = false;
-
+    void ClickOnProcess(Process input);
     ~Sysmon();
 
 
@@ -35,6 +35,8 @@ public slots:
         void monitorButtonHandler();
         void refreshButtonHandler();
         void debugButtonHandler();
+        void fetch();
+        void OnDoubleClicked ( const  QModelIndex  & index ) ;
         void Temp(QStandardItemModel *inputModel, std::vector<pid_t> procs);
 
 

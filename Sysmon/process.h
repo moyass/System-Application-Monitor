@@ -4,6 +4,8 @@
 #include <string.h>
 #include <iostream>
 #include <chrono>
+#include <QString>
+
 #include "main.h"
 
 #define MAX_HISTORY 1000
@@ -20,7 +22,10 @@ class Process  {
     vector<double> currentSHR;
 
 
+
+
 public:
+    bool FLAG;
     void setName (string name){
         processName = name;
     }
@@ -80,16 +85,25 @@ public:
         for (double element: currentRSS)
             sigma += element;
 
-
         average = sigma / currentRSS.size();
 
-        if ((currentRSS.back() / average) > 1.5){
-            cout << "The average is "<< average << " for " << processName << " and current is " << currentRSS.back() << endl;
+        if (currentRSS.size() > 5) {
+            if (((currentRSS.back() / average) > 1.5) && FLAG){
+                //FLAG = false;
+                cout << "The average is "<< average << " for " << processName << " and current is " << currentRSS.back() << endl;
+                string temp = "notify-send -t 1400 --icon=${PWD}/icon.png '"+processName +"' 'Might have a memory leak. PID: ( "+ to_string(currentPID) + " )'";
+                system(temp.c_str());
+            }
         }
+
+
+    }
+
+    vector<double> getVector(){
+        return currentRSS;
     }
 
     int compare(MemType type, double value ){
-
         return 1;
     }
 
