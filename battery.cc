@@ -8,7 +8,7 @@
 using namespace std;
 
         //bash script
-        //echo VALUE > /sys/class/backlight/intel_backlight/brightness
+        //sudo echo VALUE > /sys/class/backlight/intel_backlight/brightness
 
 #define CURRENT "cat /sys/class/backlight/intel_backlight/brightness"
 #define MIN "cat /sys/class/backlight/intel_backlight/bl_power"

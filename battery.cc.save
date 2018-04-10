@@ -1,0 +1,79 @@
+#include <iostream>
+#include <stdio.h>
+#include <stdlib.h>
+#include <fstream>
+#include <sstream>
+#include <string>
+#include <iomanip>
+using namespace std;
+
+//screen brightness file paths
+#define CURRENT "cat /sys/class/backlight/intel_backlight/brightness"
+#define MIN "cat /sys/class/backlight/intel_backlight/bl_power"
+#define MAX "cat /sys/class/backlight/intel_backlight/max_brightness"
+
+int StateInfo(int choice){
+	string line;
+
+	if(choice == 0) FILE *fp = popen(MIN, "r");
+	else if(choice == 1) FILE *fp = popen(MAX, "r");
+	else FILE *fp = popen(CURRENT,"r");
+	
+	char buffer[BUFSIZ];
+	int brightness = 0; 
+	
+	while ( fgets( buffer, BUFSIZ, fp ) != NULL ) {
+
+	  stringstream current(buffer);
+	  current >> brightness;
+
+	}
+	pclose(fp);
+	return brightness;
+	
+}
+
+int Set(char brightness){
+	//'l' low
+	//'m' mid
+	//'h' high
+
+	string line;
+	FILE *fp = popen(CURRENT, "w");
+	char buffer[BUFSI
+	
+	while ( fgets( buffer, BUFSIZ, fp ) != NULL ) {
+		stringstream current_temp(buffer);
+		current_temp >> core_temp;
+		
+		if(core_temp > max_core_temp)
+			max_core_temp = core_temp;
+	}
+	return max_core_temp / 1000;
+}
+
+int Alarm(){
+
+	int danger_zone = MaxTemp() - 20;
+
+	if(CoreTemp() >= danger_zone) return 1;
+	else return 0;
+
+}
+
+
+int main () {
+	cout << "\nCPU temperature information" << endl;
+	cout<<setfill('-')<<setw(80)<<"-"<<endl;
+	cout << "Average CPU temp (all cores): " << CoreTemp() << " degrees Celcius" << endl;
+	cout << "CPU Package temp: " << PackageTemp() << " degrees Celcius" << endl;
+	cout << "CPU Socket temp: " << SocketTemp() << " degrees Celcius" << endl;
+	cout << "Max CPU temp: " << MaxTemp() << " degrees Celcius" << endl;
+
+	if(Alarm())
+		cout << "CPU temp is dangerously high!" << endl;
+	else
+		cout << "CPU temp is gucci" << endl;
+	cout<<setfill('-')<<setw(80)<<"-"<<endl;
+	return 0;
+}
