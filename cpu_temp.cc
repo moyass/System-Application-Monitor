@@ -11,7 +11,7 @@ using namespace std;
 #define SOCKET "cat /sys/class/hwmon/hwmon0/temp*_input"
 #define CORE "cat /sys/class/hwmon/hwmon1/temp*_input"
 #define PACKAGE "cat /sys/class/hwmon/hwmon2/temp*_input"
-#define MAX "cat /sys/class/hwmon/hwmon1/temp*_crit"
+#define MAX "cat /sys/class/hwmon/hwmon2/temp*_crit"
 
 int CoreTemp(){
 	string line;
