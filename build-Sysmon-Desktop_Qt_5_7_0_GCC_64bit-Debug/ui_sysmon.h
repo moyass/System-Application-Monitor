@@ -30,7 +30,6 @@ public:
     QTabWidget *tabWidget;
     QWidget *tab;
     QPushButton *refreshButton;
-    QLabel *label_3;
     QPushButton *aboutButton;
     QPushButton *monitorButton;
     QFrame *line;
@@ -69,9 +68,6 @@ public:
         refreshButton = new QPushButton(tab);
         refreshButton->setObjectName(QStringLiteral("refreshButton"));
         refreshButton->setGeometry(QRect(599, 440, 81, 41));
-        label_3 = new QLabel(tab);
-        label_3->setObjectName(QStringLiteral("label_3"));
-        label_3->setGeometry(QRect(130, 460, 321, 16));
         aboutButton = new QPushButton(tab);
         aboutButton->setObjectName(QStringLiteral("aboutButton"));
         aboutButton->setGeometry(QRect(690, 440, 101, 41));
@@ -249,7 +245,6 @@ public:
     {
         Sysmon->setWindowTitle(QApplication::translate("Sysmon", "Sysmon", 0));
         refreshButton->setText(QApplication::translate("Sysmon", "Refresh", 0));
-        label_3->setText(QApplication::translate("Sysmon", "Currently No Process Seems to have a memory leak", 0));
         aboutButton->setText(QApplication::translate("Sysmon", "About", 0));
         monitorButton->setText(QApplication::translate("Sysmon", "Monitor", 0));
         toolButton->setText(QApplication::translate("Sysmon", "...", 0));

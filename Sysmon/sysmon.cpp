@@ -94,7 +94,6 @@ void Sysmon::Temp(QStandardItemModel *inputModel, vector<pid_t> procs){
         pidState    = new QStandardItem(myString);
 
 
-
         // TODO: Fix up algorithm of storing the information
         // TODO: If a process is closed, remove it from the vector
 
@@ -138,9 +137,7 @@ void Sysmon::Temp(QStandardItemModel *inputModel, vector<pid_t> procs){
             FOUND = false;
         }
 
-
         QStandardItem *myData[] = {pidState, currentPID, pidCommand, pidMemUsage, pidRssSize };
-
         PopulateTable(inputModel,myData, row++);
         ui->tableView->update();
     }
@@ -220,9 +217,12 @@ void Sysmon::ClickOnProcess(Process input){
     }
 
     QChart *chart = new QChart();
+
     chart->legend()->hide();
     chart->addSeries(series);
     chart->createDefaultAxes();
+    chart->axisX()->setTitleText("Interval");
+    chart->axisY()->setTitleText("Usage in KB");
     chart->setTitle(appName);
 
     QChartView *chartView = new QChartView(chart);
@@ -240,11 +240,10 @@ void Sysmon::monitorButtonHandler(){
     msgBox.setText("The proccess monitoring system has started. To turn it off press 'Monitor' once more");
     msgBox.exec();
 
-    // Timer that refreshes the process table (vector) every INTERVAL_SECONDS
-
+    // Timer that refreshes the process table (vector) every INTERVAL_SECONDSS
     QObject::connect(timer, SIGNAL(timeout()), this, SLOT(refreshButtonHandler()));
     if(!timer->isActive()){
-        timer->start(INTERVAL_SECONDS); //time specified in ms
+        timer->start(INTERVAL_SECONDS); // time specified in ms
         cout << "Constant monitoring has started" << endl;
     }else{
         timer->stop(); // stop the timer
@@ -272,7 +271,6 @@ void Sysmon::refreshButtonHandler(){
         s.model();
         s.FLAG=false;
        }
-
     }
 
     if (DEBUG_MODE){
@@ -280,7 +278,6 @@ void Sysmon::refreshButtonHandler(){
             cout << endl << s.getName() << endl;
             s.printOutValues(RSS);
         }
-
         cout << endl;
         cout << "Size of DB (bytes): " << sizeof(Process) << endl;
         cout << "Size of DB: " << procDB.size() * sizeof(Process) << endl;
