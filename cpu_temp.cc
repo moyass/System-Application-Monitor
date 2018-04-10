@@ -9,8 +9,8 @@ using namespace std;
 
 //temperature file paths
 #define SOCKET "cat /sys/class/hwmon/hwmon0/temp*_input"
-#define CORE "cat /sys/class/hwmon/hwmon1/temp*_input"
-#define PACKAGE "cat /sys/class/hwmon/hwmon2/temp*_input"
+#define PACKAGE "cat /sys/class/hwmon/hwmon1/temp*_input"
+#define CORE "cat /sys/class/hwmon/hwmon2/temp*_input"
 #define MAX "cat /sys/class/hwmon/hwmon2/temp*_crit"
 
 int CoreTemp(){
@@ -20,7 +20,7 @@ int CoreTemp(){
 	int core_temp = 0; 
 	int number_of_cores = 0; 
 	int average_core_temp = 0;
-	
+
 	while ( fgets( buffer, BUFSIZ, fp ) != NULL ) {
 
 	  stringstream current_temp(buffer);
@@ -41,7 +41,7 @@ int SocketTemp(){
 	FILE *fp = popen(SOCKET, "r");
 	char buffer[BUFSIZ];
 	int socket_temp = 0; 
-	
+	if(!fp) return -1;
 	while ( fgets( buffer, BUFSIZ, fp ) != NULL ) {
 
 	  stringstream current_temp(buffer);
@@ -60,7 +60,7 @@ int PackageTemp(){
 	FILE *fp = popen(PACKAGE, "r");
 	char buffer[BUFSIZ];
 	int pack_temp = 0; 
-	
+	if(!fp) return -1;
 	while ( fgets( buffer, BUFSIZ, fp ) != NULL ) {
 
 	  stringstream current_temp(buffer);
