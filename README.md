@@ -10,6 +10,9 @@
 > sudo apt install linux-tools-generic
 
 
+###For Ubuntu users
+####Update your OSD to allow for -t to work here http://www.webupd8.org/2010/05/finally-easy-way-to-customize-notify.html
+
 ## Background
 
 Using the Linux operating system, this utility offers a simple to use system monitor, that provides system information for temperatures of various hardware components. In addition, the software also the ability to detect memory leaks from running processes.
