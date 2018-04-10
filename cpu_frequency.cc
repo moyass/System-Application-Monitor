@@ -13,12 +13,12 @@ using namespace std;
 
 #define POWERSAVER "\
 #/bin/bash \n\
-cpupower frequency-set -g powersave \n\
+sudo cpupower frequency-set -g powersave \n\
 "
 
 #define PERFORMANCE "\
 #/bin/bash \n\
-cpupower frequency-set -g performance \n\
+sudo cpupower frequency-set -g performance \n\
 "
 
 //frequency file paths
@@ -85,8 +85,8 @@ int CurrentFreq(){
 
 }
 
-void Powersaver(){ system(POWERSAVER); }
-void Performance(){ system(PERFORMANCE); }
+void Powersaver(){ popen(POWERSAVER, "r"); }
+void Performance(){ popen(PERFORMANCE, "r"); }
 
 int main () {
 
