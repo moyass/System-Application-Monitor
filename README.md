@@ -15,6 +15,9 @@ The following installations were used for kernel 4.13.0-38: </p>
 > sudo apt install linux-cloud-tools-4.13.0-38-generic
 
 
+### For Ubuntu users
+Update your OSD to allow for -t to work here http://www.webupd8.org/2010/05/finally-easy-way-to-customize-notify.html
+
 ## Background
 
 Using the Linux operating system, this utility offers a simple to use system monitor, that provides system information for temperatures and frequencies of the cpu and its components. 

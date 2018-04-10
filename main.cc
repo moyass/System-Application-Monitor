@@ -50,7 +50,7 @@ int GetAllProcsInfo(procinfo *tProcInfo, vector<pid_t> *procs, bool display){
          */
         if (strcmp(tProcInfo -> exName, "a.out") == 0){
             cout << tProcInfo -> exName << " under PID " << tProcInfo -> pid 
-                 << " is using " << tProcInfo -> vsize / 1024 << " MB" << endl;
+                 << " is using " << tProcInfo -> vsize / 1024 << " KB" << endl;
         }
         }
 
