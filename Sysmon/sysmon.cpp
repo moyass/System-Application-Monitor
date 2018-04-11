@@ -23,9 +23,7 @@ vector<pid_t> Sysmon::listDir(const string& path)
 {
     DIR *dir;
     struct dirent *ent;
-
     pid_t current;
-
     vector<pid_t> listofprocs;
 
     if((dir = opendir (path.c_str())) != NULL)
@@ -74,7 +72,6 @@ void Sysmon::Temp(QStandardItemModel *inputModel, vector<pid_t> procs){
     bool FOUND = false;
 
 
-
     for (pid_t pid : procs){
         Process tempProcess;
         get_proc_info(pid, &procInfo);
@@ -92,10 +89,6 @@ void Sysmon::Temp(QStandardItemModel *inputModel, vector<pid_t> procs){
         pidMemUsage = new QStandardItem(QString::number(procInfo.vsize));
         pidRssSize  = new QStandardItem(QString::number(procInfo.rss));
         pidState    = new QStandardItem(myString);
-
-
-        // TODO: Fix up algorithm of storing the information
-        // TODO: If a process is closed, remove it from the vector
 
         // LOGIC:
 
@@ -187,15 +180,20 @@ Sysmon::Sysmon(QWidget *parent) :QWidget(parent), ui(new Ui::Sysmon)
     connect(ui->monitorButton , SIGNAL(released()), this, SLOT(monitorButtonHandler()));
     connect(ui->refreshButton , SIGNAL(released()), this, SLOT(refreshButtonHandler()));
     connect(ui->toolButton    , SIGNAL(released()), this, SLOT(debugButtonHandler()));
-
-    ui->tableView->setModel(model);
     connect(ui->tableView, SIGNAL(doubleClicked(QModelIndex)), this, SLOT(OnDoubleClicked(QModelIndex)));
 
+    QWidget * tab = ui->tab_2;
+    QVBoxLayout * layout = new QVBoxLayout;
+    tab->setLayout(layout);
+    tab->show();
+
+
+
+    ui->tableView->setModel(model);
 }
 
 
 void Sysmon::aboutButtonHandler(){
-
     QMessageBox::information(
         this,
         tr("About"),
