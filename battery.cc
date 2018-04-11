@@ -7,10 +7,15 @@
 #include <iomanip>
 using namespace std;
 
-/*#define CHANGE "\
+#define POWERSAVER "\
 #/bin/bash \n\
-sudo echo $1 > /sys/class/backlight/intel_backlight/brightness \n\
-"*/
+sudo echo 1000 > /sys/class/backlight/intel_backlight/brightness \n\
+"
+
+#define PERFORMANCE "\
+#/bin/bash \n\
+sudo echo 7500 > /sys/class/backlight/intel_backlight/brightness \n\
+"
 
 #define CURRENT "cat /sys/class/backlight/intel_backlight/brightness"
 //#define MIN "cat /sys/class/backlight/intel_backlight/bl_power"
@@ -56,15 +61,11 @@ int MaxBrightness(){
 }
 
 void Powersaver(){
-	int screen = MaxBrightness()/2;
-	int keyboard = 0;
-	system("changeBrightness.sh " + screen + keyboard); 
+	popen(POWERSAVER, "r");
 }
 
 void Performance(){
-	int screen = MaxBrightness();
-	int keyboard = 255;
-	system("changeBrightness.sh " + screen + keyboard); 
+	popen(PERFORMANCE, "r");
 }
 
 int ChargeInfo(){
@@ -85,7 +86,7 @@ int ChargeInfo(){
 }
 
 int BatteryLow(){
-	int low = ChargeInfo()/60;
+	int low = ChargeInfo()/85;
 	if(ChargeInfo() <= low){
 		return 1;
 	}
@@ -106,7 +107,7 @@ int main () {
     cout << "\nBattery information" << endl;
 	cout << "Current Charge: " << ChargeInfo() << endl;
 	
-	if(BatteryLow) Powersaver();
+	if(BatteryLow()) Powersaver();
 	
 	return 0;
 }
