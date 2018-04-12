@@ -1,7 +1,5 @@
 #!/bin/sh
 
 sudo su <<HERE
-./freq
-./temp
-./bat
+./Sysmon
 HERE
