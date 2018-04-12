@@ -7,15 +7,17 @@
 #include <iomanip>
 using namespace std;
 
-#define POWERSAVER "\
+
+#define POWERSAVER_BATTERY "\
 #/bin/bash \n\
 sudo echo 1000 > /sys/class/backlight/intel_backlight/brightness \n\
 "
 
-#define PERFORMANCE "\
+#define PERFORMANCE_BATTERY "\
 #/bin/bash \n\
 sudo echo 7500 > /sys/class/backlight/intel_backlight/brightness \n\
 "
+
 
 #define CURRENT "cat /sys/class/backlight/intel_backlight/brightness"
 //#define MIN "cat /sys/class/backlight/intel_backlight/bl_power"
@@ -23,9 +25,26 @@ sudo echo 7500 > /sys/class/backlight/intel_backlight/brightness \n\
 #define MAX "cat /sys/class/backlight/intel_backlight/max_brightness"
 
 #define BACKLIGHT "cat /sys/class/leds/mmc0::"
-
 #define CHARGE "cat /sys/class/power_supply/BAT0/charge_now"
 #define FULL "cat /sys/class/power_supply/BAT0/charge_full"
+#define GET_BATTERY_PERCENTAGE "${PWD}/battery-percentage.sh"
+
+int GetBatteryPercentage(){
+    FILE *fp = popen(GET_BATTERY_PERCENTAGE,"r");
+
+    string line;
+    char buffer[BUFSIZ];
+    int brightness;
+
+    while ( fgets( buffer, BUFSIZ, fp ) != NULL ) {
+      stringstream max(buffer);
+      max >> brightness;
+    }
+
+    pclose(fp);
+    return brightness;
+
+}
 
 int CurrentBrightness(){
 	FILE *fp = popen(CURRENT, "r");
@@ -60,13 +79,8 @@ int MaxBrightness(){
 	return brightness;
 }
 
-void Powersaver(){
-	popen(POWERSAVER, "r");
-}
-
-void Performance(){
-	popen(PERFORMANCE, "r");
-}
+void PowersaverBattery(){popen(POWERSAVER_BATTERY, "r");}
+void PerformanceBattery(){popen(PERFORMANCE_BATTERY, "r");}
 
 int ChargeInfo(){
 
@@ -93,21 +107,23 @@ int BatteryLow(){
 	return 0;
 }
 
+/*
 int main () {
 
-	cout << "\nScreen Brightness information" << endl;
-	cout<<setfill('-')<<setw(80)<<"-"<<endl;
-	cout << "Current: " << CurrentBrightness() << endl;
-	cout << "Max: " << MaxBrightness() << endl;
-	Powersaver();
-	cout << "Current: " << CurrentBrightness() << endl;
-	Performance();
-	cout << "Current: " << CurrentBrightness() << endl;
-	cout<<setfill('-')<<setw(80)<<"-"<<endl;
+    cout << "\nScreen Brightness information" << endl;
+    cout<<setfill('-')<<setw(80)<<"-"<<endl;
+    cout << "Current: " << CurrentBrightness() << endl;
+    cout << "Max: " << MaxBrightness() << endl;
+    Powersaver();
+    cout << "Current: " << CurrentBrightness() << endl;
+    Performance();
+    cout << "Current: " << CurrentBrightness() << endl;
+    cout<<setfill('-')<<setw(80)<<"-"<<endl;
     cout << "\nBattery information" << endl;
-	cout << "Current Charge: " << ChargeInfo() << endl;
+    cout << "Current Charge: " << ChargeInfo() << endl;
 	
-	if(BatteryLow()) Powersaver();
+    if(BatteryLow()) Powersaver();
 	
-	return 0;
+    return 0;
 }
+*/

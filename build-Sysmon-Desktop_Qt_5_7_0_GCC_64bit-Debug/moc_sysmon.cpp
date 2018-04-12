@@ -6,7 +6,7 @@
 ** WARNING! All changes made in this file will be lost!
 *****************************************************************************/
 
-#include "../../deow/System-Application-Monitor/Sysmon/sysmon.h"
+#include "../Sysmon/sysmon.h"
 #include <QtCore/qbytearray.h>
 #include <QtCore/qmetatype.h>
 #if !defined(Q_MOC_OUTPUT_REVISION)
@@ -19,8 +19,8 @@
 
 QT_BEGIN_MOC_NAMESPACE
 struct qt_meta_stringdata_Sysmon_t {
-    QByteArrayData data[14];
-    char stringdata0[177];
+    QByteArrayData data[17];
+    char stringdata0[209];
 };
 #define QT_MOC_LITERAL(idx, ofs, len) \
     Q_STATIC_BYTE_ARRAY_DATA_HEADER_INITIALIZER_WITH_OFFSET(len, \
@@ -36,18 +36,22 @@ QT_MOC_LITERAL(3, 27, 20), // "monitorButtonHandler"
 QT_MOC_LITERAL(4, 48, 20), // "refreshButtonHandler"
 QT_MOC_LITERAL(5, 69, 18), // "debugButtonHandler"
 QT_MOC_LITERAL(6, 88, 5), // "fetch"
-QT_MOC_LITERAL(7, 94, 15), // "OnDoubleClicked"
-QT_MOC_LITERAL(8, 110, 5), // "index"
-QT_MOC_LITERAL(9, 116, 4), // "Temp"
-QT_MOC_LITERAL(10, 121, 19), // "QStandardItemModel*"
-QT_MOC_LITERAL(11, 141, 10), // "inputModel"
-QT_MOC_LITERAL(12, 152, 18), // "std::vector<pid_t>"
-QT_MOC_LITERAL(13, 171, 5) // "procs"
+QT_MOC_LITERAL(7, 94, 11), // "setProgress"
+QT_MOC_LITERAL(8, 106, 3), // "val"
+QT_MOC_LITERAL(9, 110, 15), // "connectToSlider"
+QT_MOC_LITERAL(10, 126, 15), // "OnDoubleClicked"
+QT_MOC_LITERAL(11, 142, 5), // "index"
+QT_MOC_LITERAL(12, 148, 4), // "Temp"
+QT_MOC_LITERAL(13, 153, 19), // "QStandardItemModel*"
+QT_MOC_LITERAL(14, 173, 10), // "inputModel"
+QT_MOC_LITERAL(15, 184, 18), // "std::vector<pid_t>"
+QT_MOC_LITERAL(16, 203, 5) // "procs"
 
     },
     "Sysmon\0aboutButtonHandler\0\0"
     "monitorButtonHandler\0refreshButtonHandler\0"
-    "debugButtonHandler\0fetch\0OnDoubleClicked\0"
+    "debugButtonHandler\0fetch\0setProgress\0"
+    "val\0connectToSlider\0OnDoubleClicked\0"
     "index\0Temp\0QStandardItemModel*\0"
     "inputModel\0std::vector<pid_t>\0procs"
 };
@@ -59,7 +63,7 @@ static const uint qt_meta_data_Sysmon[] = {
        7,       // revision
        0,       // classname
        0,    0, // classinfo
-       7,   14, // methods
+       9,   14, // methods
        0,    0, // properties
        0,    0, // enums/sets
        0,    0, // constructors
@@ -67,13 +71,15 @@ static const uint qt_meta_data_Sysmon[] = {
        0,       // signalCount
 
  // slots: name, argc, parameters, tag, flags
-       1,    0,   49,    2, 0x0a /* Public */,
-       3,    0,   50,    2, 0x0a /* Public */,
-       4,    0,   51,    2, 0x0a /* Public */,
-       5,    0,   52,    2, 0x0a /* Public */,
-       6,    0,   53,    2, 0x0a /* Public */,
-       7,    1,   54,    2, 0x0a /* Public */,
-       9,    2,   57,    2, 0x0a /* Public */,
+       1,    0,   59,    2, 0x0a /* Public */,
+       3,    0,   60,    2, 0x0a /* Public */,
+       4,    0,   61,    2, 0x0a /* Public */,
+       5,    0,   62,    2, 0x0a /* Public */,
+       6,    0,   63,    2, 0x0a /* Public */,
+       7,    1,   64,    2, 0x0a /* Public */,
+       9,    0,   67,    2, 0x0a /* Public */,
+      10,    1,   68,    2, 0x0a /* Public */,
+      12,    2,   71,    2, 0x0a /* Public */,
 
  // slots: parameters
     QMetaType::Void,
@@ -81,8 +87,10 @@ static const uint qt_meta_data_Sysmon[] = {
     QMetaType::Void,
     QMetaType::Void,
     QMetaType::Void,
-    QMetaType::Void, QMetaType::QModelIndex,    8,
-    QMetaType::Void, 0x80000000 | 10, 0x80000000 | 12,   11,   13,
+    QMetaType::Void, QMetaType::Int,    8,
+    QMetaType::Void,
+    QMetaType::Void, QMetaType::QModelIndex,   11,
+    QMetaType::Void, 0x80000000 | 13, 0x80000000 | 15,   14,   16,
 
        0        // eod
 };
@@ -98,14 +106,16 @@ void Sysmon::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, void
         case 2: _t->refreshButtonHandler(); break;
         case 3: _t->debugButtonHandler(); break;
         case 4: _t->fetch(); break;
-        case 5: _t->OnDoubleClicked((*reinterpret_cast< const QModelIndex(*)>(_a[1]))); break;
-        case 6: _t->Temp((*reinterpret_cast< QStandardItemModel*(*)>(_a[1])),(*reinterpret_cast< std::vector<pid_t>(*)>(_a[2]))); break;
+        case 5: _t->setProgress((*reinterpret_cast< int(*)>(_a[1]))); break;
+        case 6: _t->connectToSlider(); break;
+        case 7: _t->OnDoubleClicked((*reinterpret_cast< const QModelIndex(*)>(_a[1]))); break;
+        case 8: _t->Temp((*reinterpret_cast< QStandardItemModel*(*)>(_a[1])),(*reinterpret_cast< std::vector<pid_t>(*)>(_a[2]))); break;
         default: ;
         }
     } else if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
         switch (_id) {
         default: *reinterpret_cast<int*>(_a[0]) = -1; break;
-        case 6:
+        case 8:
             switch (*reinterpret_cast<int*>(_a[1])) {
             default: *reinterpret_cast<int*>(_a[0]) = -1; break;
             case 0:
@@ -141,13 +151,13 @@ int Sysmon::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
     if (_id < 0)
         return _id;
     if (_c == QMetaObject::InvokeMetaMethod) {
-        if (_id < 7)
+        if (_id < 9)
             qt_static_metacall(this, _c, _id, _a);
-        _id -= 7;
+        _id -= 9;
     } else if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
-        if (_id < 7)
+        if (_id < 9)
             qt_static_metacall(this, _c, _id, _a);
-        _id -= 7;
+        _id -= 9;
     }
     return _id;
 }

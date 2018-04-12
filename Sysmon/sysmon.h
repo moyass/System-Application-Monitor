@@ -6,9 +6,11 @@
 #include <QTableWidget>
 #include <QStandardItemModel>
 #include <main.h>
+#include <QPaintEvent>
 #include <qobject.h>
 #include <QTimer>
 #include "process.h"
+#include "QRoundProgressBar.h"
 
 namespace Ui {
 class Sysmon;
@@ -36,15 +38,22 @@ public slots:
         void refreshButtonHandler();
         void debugButtonHandler();
         void fetch();
+        void setProgress(int val);
+        void connectToSlider();
         void OnDoubleClicked ( const  QModelIndex  & index ) ;
         void Temp(QStandardItemModel *inputModel, std::vector<pid_t> procs);
 
+protected:
+        void paintEvent(QPaintEvent *);
 
 private:
+    double progress;
     Ui::Sysmon *ui;
     QTimer *timer = new QTimer(this);
+    QTimer *timer_hw = new QTimer(this);
     void PopulateTable(QStandardItemModel *inputModel,QStandardItem *data[], int row);
     std::vector<pid_t> listDir(const std::string& path);
+
 
 };
 

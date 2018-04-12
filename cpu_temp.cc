@@ -5,6 +5,7 @@
 #include <sstream>
 #include <string>
 #include <iomanip>
+#include <main.h>
 using namespace std;
 
 //temperature file paths
@@ -99,7 +100,7 @@ int Alarm(){
 
 }
 
-
+/*
 int main () {
 	cout << "\nCPU temperature information" << endl;
 	cout<<setfill('-')<<setw(80)<<"-"<<endl;
@@ -115,3 +116,4 @@ int main () {
 	cout<<setfill('-')<<setw(80)<<"-"<<endl;
 	return 0;
 }
+*/

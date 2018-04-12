@@ -15,12 +15,12 @@
 #include <QtWidgets/QButtonGroup>
 #include <QtWidgets/QFrame>
 #include <QtWidgets/QHeaderView>
-#include <QtWidgets/QLabel>
 #include <QtWidgets/QPushButton>
 #include <QtWidgets/QTabWidget>
 #include <QtWidgets/QTableView>
 #include <QtWidgets/QToolButton>
 #include <QtWidgets/QWidget>
+#include "QRoundProgressBar.h"
 
 QT_BEGIN_NAMESPACE
 
@@ -36,7 +36,11 @@ public:
     QTableView *tableView;
     QToolButton *toolButton;
     QWidget *tab_2;
-    QLabel *label;
+    QPushButton *pushButton;
+    QPushButton *pushButton_2;
+    QRoundProgressBar *RoundBar1;
+    QRoundProgressBar *RoundBar2;
+    QRoundProgressBar *RoundBar3;
 
     void setupUi(QWidget *Sysmon)
     {
@@ -226,9 +230,21 @@ public:
         tabWidget->addTab(tab, QString());
         tab_2 = new QWidget();
         tab_2->setObjectName(QStringLiteral("tab_2"));
-        label = new QLabel(tab_2);
-        label->setObjectName(QStringLiteral("label"));
-        label->setGeometry(QRect(10, 10, 151, 16));
+        pushButton = new QPushButton(tab_2);
+        pushButton->setObjectName(QStringLiteral("pushButton"));
+        pushButton->setGeometry(QRect(20, 310, 180, 40));
+        pushButton_2 = new QPushButton(tab_2);
+        pushButton_2->setObjectName(QStringLiteral("pushButton_2"));
+        pushButton_2->setGeometry(QRect(20, 390, 180, 40));
+        RoundBar1 = new QRoundProgressBar(tab_2);
+        RoundBar1->setObjectName(QStringLiteral("RoundBar1"));
+        RoundBar1->setGeometry(QRect(20, 30, 231, 221));
+        RoundBar2 = new QRoundProgressBar(tab_2);
+        RoundBar2->setObjectName(QStringLiteral("RoundBar2"));
+        RoundBar2->setGeometry(QRect(280, 30, 231, 221));
+        RoundBar3 = new QRoundProgressBar(tab_2);
+        RoundBar3->setObjectName(QStringLiteral("RoundBar3"));
+        RoundBar3->setGeometry(QRect(530, 30, 231, 221));
         tabWidget->addTab(tab_2, QString());
 
         retranslateUi(Sysmon);
@@ -249,7 +265,8 @@ public:
         monitorButton->setText(QApplication::translate("Sysmon", "Monitor", 0));
         toolButton->setText(QApplication::translate("Sysmon", "...", 0));
         tabWidget->setTabText(tabWidget->indexOf(tab), QApplication::translate("Sysmon", "Processess", 0));
-        label->setText(QApplication::translate("Sysmon", "Temperature and Shit", 0));
+        pushButton->setText(QApplication::translate("Sysmon", "Powersaver Mode", 0));
+        pushButton_2->setText(QApplication::translate("Sysmon", "Powersaver Mode", 0));
         tabWidget->setTabText(tabWidget->indexOf(tab_2), QApplication::translate("Sysmon", "Hardware Info", 0));
     } // retranslateUi
 

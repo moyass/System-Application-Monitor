@@ -19,6 +19,32 @@
 
 
 
+// CPU Temperature
+int CoreTemp();
+int SocketTemp();
+int MaxTemp();
+int PackageTemp();
+int MaxTemp();
+int Alarm();
+
+// Battery.cc
+int  CurrentBrightness();
+int  MaxBrightness();
+int  ChargeInfo();
+void PowersaverBattery();
+void PerformaceBattery();
+int  BatteryLow();
+int GetBatteryPercentage();
+
+// CPU Frequency
+int  CurrentFreq();
+int  CPUFrequencyMax();
+int  CPUFrequencyMin();
+void Powersaver_CPU_FREQ();
+void Performance_CPU_FREQ();
+
+
+
 typedef struct MemoryHistory {
   /* Delta between multiple memory usages */
   int old = 0;

@@ -5,18 +5,19 @@
 #include <sstream>
 #include <string>
 #include <iomanip>
+#include <main.h>
 using namespace std;
 
 // check quick : lscpu | grep -i mhz
 // set max manually: cpupower frequency-set -u new_int
 
 
-#define POWERSAVER "\
+#define POWERSAVER_CPU_FREQ "\
 #/bin/bash \n\
 sudo cpupower frequency-set -g powersave \n\
 "
 
-#define PERFORMANCE "\
+#define PERFORMANCE_CPU_FREQ "\
 #/bin/bash \n\
 sudo cpupower frequency-set -g performance \n\
 "
@@ -26,7 +27,7 @@ sudo cpupower frequency-set -g performance \n\
 #define MIN "cat /sys/devices/system/cpu/cpufreq/policy0/cpuinfo_min_freq"
 #define CURRENT "cat /sys/devices/system/cpu/cpufreq/policy*/scaling_cur_freq"
 
-int Max(){
+int CPUFrequencyMax(){
 	string line;
 	FILE *fp = popen(MAX, "r");
 	char buffer[BUFSIZ];
@@ -44,7 +45,7 @@ int Max(){
 	
 }
 
-int Min(){
+int CPUFrequencyMin(){
 	string line;
 	FILE *fp = popen(MIN, "r");
 	char buffer[BUFSIZ];
@@ -79,15 +80,17 @@ int CurrentFreq(){
 
 	}
 	pclose(fp);
+
 	//convert to MHz and average all cores
 	average_freq /= number_of_cores * 1000;
 	return average_freq;
 
 }
 
-void Powersaver(){ popen(POWERSAVER, "r"); }
-void Performance(){ popen(PERFORMANCE, "r"); }
+void Powersaver_CPU_FREQ(){ popen(POWERSAVER_CPU_FREQ, "r"); }
+void Performance_CPU_FREQ(){ popen(PERFORMANCE_CPU_FREQ, "r"); }
 
+/*
 int main () {
 
 	cout << "\nCPU frequency information" << endl;
@@ -106,3 +109,4 @@ int main () {
 	cout<<setfill('-')<<setw(80)<<"-"<<endl;
 	return 0;
 }
+*/

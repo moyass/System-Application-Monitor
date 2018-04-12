@@ -14,16 +14,22 @@ TEMPLATE = app
 
 SOURCES += main.cpp\
         sysmon.cpp \
-    get-proc-info.cpp
+    get-proc-info.cpp \
+    QRoundProgressBar.cpp \
+    ../battery.cc \
+    ../cpu_frequency.cc \
+    ../cpu_temp.cc
 
 HEADERS  += sysmon.h \
     main.h \
-    process.h
+    process.h \
+    QRoundProgressBar.h
 
 FORMS    += sysmon.ui \
     dockwidget.ui
 
 LIBS += -lprocps
 
-DISTFILES +=
+DISTFILES += \
+    ../battery-percentage.sh
 

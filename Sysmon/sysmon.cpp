@@ -17,6 +17,7 @@
 #include <QtCharts>
 
 using namespace std;
+using namespace QtCharts;
 
 /* Lists all directories in the provided directory */
 vector<pid_t> Sysmon::listDir(const string& path)
@@ -164,6 +165,35 @@ void Sysmon :: OnDoubleClicked ( const  QModelIndex  & index )
    cout << pid.toStdString() << endl;
 
 }
+void Sysmon::setProgress(int val)
+{
+    progress = (double)val/100;
+    //yes, it is not very good, the best approach is to
+    //create something similar to QProgressBar
+    this->update();
+}
+
+void Sysmon::paintEvent(QPaintEvent *)
+{
+    QPainter p(this);
+
+    QPen pen;
+    pen.setWidth(7);
+    pen.setColor(Qt::red);
+    p.setPen(pen);
+
+    p.setRenderHint(QPainter::Antialiasing);
+
+    QRectF rectangle(10.0, 20.0, 80.0, 80.0);
+    //to understand these magic numbers, look drawArc method in Qt doc
+    int startAngle = -90 * 16;
+    int spanAngle = progress * 360 * 16;
+
+    p.drawArc(rectangle, startAngle, spanAngle);
+
+    p.drawText(rectangle,Qt::AlignCenter,QString::number(progress*100)+" %");
+}
+
 
 Sysmon::Sysmon(QWidget *parent) :QWidget(parent), ui(new Ui::Sysmon)
 {
@@ -182,14 +212,82 @@ Sysmon::Sysmon(QWidget *parent) :QWidget(parent), ui(new Ui::Sysmon)
     connect(ui->toolButton    , SIGNAL(released()), this, SLOT(debugButtonHandler()));
     connect(ui->tableView, SIGNAL(doubleClicked(QModelIndex)), this, SLOT(OnDoubleClicked(QModelIndex)));
 
-    QWidget * tab = ui->tab_2;
-    QVBoxLayout * layout = new QVBoxLayout;
-    tab->setLayout(layout);
-    tab->show();
+    QLineSeries *series = new QLineSeries();
+    QChart *chart = new QChart();
 
+    series->append(0, 6);
+    series->append(2, 4);
+    series->append(3, 8);
+    series->append(7, 4);
+    series->append(10, 5);
+    *series << QPointF(11, 1) << QPointF(13, 3) << QPointF(17, 6) << QPointF(18, 3) << QPointF(20, 2);
+
+    chart->legend()->hide();
+    chart->addSeries(series);
+    chart->createDefaultAxes();
+    chart->axisX()->setTitleText("Interval");
+    chart->axisY()->setTitleText("Usage in KB");
+    chart->setTitle("Chart");
+
+    //ui->PieChart->setChart(chart);
+
+    QGradientStops gradientPoints;
+    gradientPoints << QGradientStop(0, Qt::yellow) << QGradientStop(1, Qt::red);
+
+    QGradientStops banafsajeee;
+    banafsajeee << QGradientStop(0, Qt::blue) << QGradientStop(1, Qt::black);
+
+    QGradientStops yaabattery;
+    yaabattery << QGradientStop(0, Qt::green) << QGradientStop(1, Qt::darkGreen);
+
+    QPalette p1;
+    p1.setBrush(QPalette::AlternateBase, Qt::white);
+    p1.setColor(QPalette::Text, Qt::black);
+
+    ui->RoundBar1->setFormat("Battery\n%v");
+    ui->RoundBar1->setPalette(p1);
+    ui->RoundBar1->setDecimals(2);
+    ui->RoundBar1->setValue(0);
+    ui->RoundBar1->setDataColors(yaabattery);
+
+    QPalette p2;
+    p2.setBrush(QPalette::AlternateBase, Qt::white);
+    p2.setColor(QPalette::Text, Qt::black);
+
+    ui->RoundBar2->setFormat("CPU Temperature\n%v");
+    ui->RoundBar2->setPalette(p2);
+    ui->RoundBar2->setDecimals(0);
+    ui->RoundBar2->setRange(0, MaxTemp());
+    ui->RoundBar2->setValue(CoreTemp());
+    ui->RoundBar2->setValue(0);
+    ui->RoundBar2->setDataColors(gradientPoints);
+
+    QPalette p3;
+    p3.setBrush(QPalette::AlternateBase, Qt::white);
+    p3.setColor(QPalette::Text, Qt::black);
+
+    ui->RoundBar3->setFormat("CPU Frequence\n%v");
+    ui->RoundBar3->setPalette(p3);
+    ui->RoundBar3->setDecimals(0);
+    ui->RoundBar3->setRange(CPUFrequencyMin(),CPUFrequencyMax());
+    ui->RoundBar3->setValue(CurrentFreq());
+    ui->RoundBar3->setValue(0);
+    ui->RoundBar3->setDataColors(banafsajeee);
 
 
     ui->tableView->setModel(model);
+
+    // Timer that refreshes the process table (vector) every INTERVAL_SECONDSS
+    QObject::connect(timer_hw, SIGNAL(timeout()), this, SLOT(connectToSlider()));
+    timer_hw->start(1000);
+}
+
+void Sysmon::connectToSlider()
+{
+
+    ui->RoundBar1->setValue(GetBatteryPercentage());
+    ui->RoundBar2->setValue(CoreTemp());
+    ui->RoundBar3->setValue(CurrentFreq());
 }
 
 
