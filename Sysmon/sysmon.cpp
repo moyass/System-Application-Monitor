@@ -310,7 +310,7 @@ Sysmon::Sysmon(QWidget *parent) :QWidget(parent), ui(new Ui::Sysmon)
 
     // Timer that refreshes the process table (vector) every INTERVAL_SECONDSS
     QObject::connect(timer_hw, SIGNAL(timeout()), this, SLOT(connectToSlider()));
-    timer_hw->start(1000);
+    timer_hw->start(3000);
 }
 
 void Sysmon::connectToSlider()
