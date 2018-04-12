@@ -14,12 +14,15 @@
 #include <QtWidgets/QApplication>
 #include <QtWidgets/QButtonGroup>
 #include <QtWidgets/QFrame>
+#include <QtWidgets/QGroupBox>
 #include <QtWidgets/QHeaderView>
 #include <QtWidgets/QLabel>
 #include <QtWidgets/QPushButton>
 #include <QtWidgets/QTabWidget>
 #include <QtWidgets/QTableView>
+#include <QtWidgets/QToolButton>
 #include <QtWidgets/QWidget>
+#include "QRoundProgressBar.h"
 
 QT_BEGIN_NAMESPACE
 
@@ -29,12 +32,34 @@ public:
     QTabWidget *tabWidget;
     QWidget *tab;
     QPushButton *refreshButton;
-    QLabel *label_3;
     QPushButton *aboutButton;
     QPushButton *monitorButton;
     QFrame *line;
     QTableView *tableView;
+    QToolButton *toolButton;
     QWidget *tab_2;
+    QPushButton *PowersaveButton;
+    QPushButton *PerformanceButton;
+    QRoundProgressBar *RoundBar1;
+    QRoundProgressBar *RoundBar2;
+    QRoundProgressBar *RoundBar3;
+    QRoundProgressBar *MemoryUsageBar;
+    QRoundProgressBar *CPUUsageBar;
+    QGroupBox *groupBox;
+    QLabel *distro;
+    QLabel *cpu;
+    QLabel *label_6;
+    QLabel *label_3;
+    QLabel *label_2;
+    QLabel *label_5;
+    QLabel *platform;
+    QLabel *kernel;
+    QLabel *label_4;
+    QLabel *label_7;
+    QLabel *label_8;
+    QLabel *hostname;
+    QLabel *storage;
+    QLabel *memory;
     QLabel *label;
 
     void setupUi(QWidget *Sysmon)
@@ -67,9 +92,6 @@ public:
         refreshButton = new QPushButton(tab);
         refreshButton->setObjectName(QStringLiteral("refreshButton"));
         refreshButton->setGeometry(QRect(599, 440, 81, 41));
-        label_3 = new QLabel(tab);
-        label_3->setObjectName(QStringLiteral("label_3"));
-        label_3->setGeometry(QRect(130, 460, 321, 16));
         aboutButton = new QPushButton(tab);
         aboutButton->setObjectName(QStringLiteral("aboutButton"));
         aboutButton->setGeometry(QRect(690, 440, 101, 41));
@@ -222,17 +244,95 @@ public:
         tableView->verticalHeader()->setCascadingSectionResizes(false);
         tableView->verticalHeader()->setDefaultSectionSize(30);
         tableView->verticalHeader()->setMinimumSectionSize(30);
+        toolButton = new QToolButton(tab);
+        toolButton->setObjectName(QStringLiteral("toolButton"));
+        toolButton->setGeometry(QRect(770, 0, 21, 16));
         tabWidget->addTab(tab, QString());
         tab_2 = new QWidget();
         tab_2->setObjectName(QStringLiteral("tab_2"));
-        label = new QLabel(tab_2);
+        PowersaveButton = new QPushButton(tab_2);
+        PowersaveButton->setObjectName(QStringLiteral("PowersaveButton"));
+        PowersaveButton->setGeometry(QRect(29, 210, 241, 40));
+        PerformanceButton = new QPushButton(tab_2);
+        PerformanceButton->setObjectName(QStringLiteral("PerformanceButton"));
+        PerformanceButton->setGeometry(QRect(29, 160, 241, 40));
+        RoundBar1 = new QRoundProgressBar(tab_2);
+        RoundBar1->setObjectName(QStringLiteral("RoundBar1"));
+        RoundBar1->setGeometry(QRect(580, 290, 181, 181));
+        RoundBar2 = new QRoundProgressBar(tab_2);
+        RoundBar2->setObjectName(QStringLiteral("RoundBar2"));
+        RoundBar2->setGeometry(QRect(290, 30, 231, 221));
+        RoundBar3 = new QRoundProgressBar(tab_2);
+        RoundBar3->setObjectName(QStringLiteral("RoundBar3"));
+        RoundBar3->setGeometry(QRect(540, 30, 231, 221));
+        MemoryUsageBar = new QRoundProgressBar(tab_2);
+        MemoryUsageBar->setObjectName(QStringLiteral("MemoryUsageBar"));
+        MemoryUsageBar->setGeometry(QRect(160, 30, 111, 111));
+        CPUUsageBar = new QRoundProgressBar(tab_2);
+        CPUUsageBar->setObjectName(QStringLiteral("CPUUsageBar"));
+        CPUUsageBar->setGeometry(QRect(30, 30, 111, 111));
+        groupBox = new QGroupBox(tab_2);
+        groupBox->setObjectName(QStringLiteral("groupBox"));
+        groupBox->setGeometry(QRect(30, 270, 531, 201));
+        QFont font1;
+        font1.setPointSize(11);
+        font1.setBold(false);
+        font1.setWeight(50);
+        groupBox->setFont(font1);
+        distro = new QLabel(groupBox);
+        distro->setObjectName(QStringLiteral("distro"));
+        distro->setGeometry(QRect(140, 70, 171, 16));
+        cpu = new QLabel(groupBox);
+        cpu->setObjectName(QStringLiteral("cpu"));
+        cpu->setGeometry(QRect(140, 109, 371, 16));
+        label_6 = new QLabel(groupBox);
+        label_6->setObjectName(QStringLiteral("label_6"));
+        label_6->setGeometry(QRect(10, 107, 101, 20));
+        label_3 = new QLabel(groupBox);
+        label_3->setObjectName(QStringLiteral("label_3"));
+        label_3->setGeometry(QRect(10, 47, 81, 20));
+        label_2 = new QLabel(groupBox);
+        label_2->setObjectName(QStringLiteral("label_2"));
+        label_2->setGeometry(QRect(10, 27, 91, 16));
+        label_5 = new QLabel(groupBox);
+        label_5->setObjectName(QStringLiteral("label_5"));
+        label_5->setGeometry(QRect(10, 87, 81, 20));
+        platform = new QLabel(groupBox);
+        platform->setObjectName(QStringLiteral("platform"));
+        platform->setGeometry(QRect(140, 49, 171, 16));
+        kernel = new QLabel(groupBox);
+        kernel->setObjectName(QStringLiteral("kernel"));
+        kernel->setGeometry(QRect(140, 89, 171, 16));
+        label_4 = new QLabel(groupBox);
+        label_4->setObjectName(QStringLiteral("label_4"));
+        label_4->setGeometry(QRect(10, 67, 111, 20));
+        label_7 = new QLabel(groupBox);
+        label_7->setObjectName(QStringLiteral("label_7"));
+        label_7->setGeometry(QRect(10, 127, 81, 20));
+        label_8 = new QLabel(groupBox);
+        label_8->setObjectName(QStringLiteral("label_8"));
+        label_8->setGeometry(QRect(10, 147, 81, 20));
+        hostname = new QLabel(groupBox);
+        hostname->setObjectName(QStringLiteral("hostname"));
+        hostname->setGeometry(QRect(140, 27, 171, 16));
+        storage = new QLabel(groupBox);
+        storage->setObjectName(QStringLiteral("storage"));
+        storage->setGeometry(QRect(140, 149, 171, 16));
+        memory = new QLabel(groupBox);
+        memory->setObjectName(QStringLiteral("memory"));
+        memory->setGeometry(QRect(140, 129, 171, 16));
+        label = new QLabel(groupBox);
         label->setObjectName(QStringLiteral("label"));
-        label->setGeometry(QRect(10, 10, 151, 16));
+        label->setGeometry(QRect(10, 0, 141, 16));
+        QFont font2;
+        font2.setBold(true);
+        font2.setWeight(75);
+        label->setFont(font2);
         tabWidget->addTab(tab_2, QString());
 
         retranslateUi(Sysmon);
 
-        tabWidget->setCurrentIndex(0);
+        tabWidget->setCurrentIndex(1);
         aboutButton->setDefault(false);
         monitorButton->setDefault(false);
 
@@ -244,11 +344,28 @@ public:
     {
         Sysmon->setWindowTitle(QApplication::translate("Sysmon", "Sysmon", 0));
         refreshButton->setText(QApplication::translate("Sysmon", "Refresh", 0));
-        label_3->setText(QApplication::translate("Sysmon", "Currently No Process Seems to have a memory leak", 0));
         aboutButton->setText(QApplication::translate("Sysmon", "About", 0));
         monitorButton->setText(QApplication::translate("Sysmon", "Monitor", 0));
+        toolButton->setText(QApplication::translate("Sysmon", "...", 0));
         tabWidget->setTabText(tabWidget->indexOf(tab), QApplication::translate("Sysmon", "Processess", 0));
-        label->setText(QApplication::translate("Sysmon", "Temperature and Shit", 0));
+        PowersaveButton->setText(QApplication::translate("Sysmon", "Powersaver Mode", 0));
+        PerformanceButton->setText(QApplication::translate("Sysmon", "Performance Mode", 0));
+        groupBox->setTitle(QString());
+        distro->setText(QApplication::translate("Sysmon", "distro", 0));
+        cpu->setText(QApplication::translate("Sysmon", "cpu", 0));
+        label_6->setText(QApplication::translate("Sysmon", "CPU Model:", 0));
+        label_3->setText(QApplication::translate("Sysmon", "Platform:", 0));
+        label_2->setText(QApplication::translate("Sysmon", "Hostname:", 0));
+        label_5->setText(QApplication::translate("Sysmon", "Kernel:", 0));
+        platform->setText(QApplication::translate("Sysmon", "platform", 0));
+        kernel->setText(QApplication::translate("Sysmon", "kernel", 0));
+        label_4->setText(QApplication::translate("Sysmon", "Distrobution:", 0));
+        label_7->setText(QApplication::translate("Sysmon", "Memory:", 0));
+        label_8->setText(QApplication::translate("Sysmon", "Storage:", 0));
+        hostname->setText(QApplication::translate("Sysmon", "localhost", 0));
+        storage->setText(QApplication::translate("Sysmon", "storage", 0));
+        memory->setText(QApplication::translate("Sysmon", "memory", 0));
+        label->setText(QApplication::translate("Sysmon", "System Information", 0));
         tabWidget->setTabText(tabWidget->indexOf(tab_2), QApplication::translate("Sysmon", "Hardware Info", 0));
     } // retranslateUi
 

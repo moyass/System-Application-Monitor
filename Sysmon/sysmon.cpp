@@ -185,12 +185,11 @@ void Sysmon::paintEvent(QPaintEvent *)
     p.setRenderHint(QPainter::Antialiasing);
 
     QRectF rectangle(10.0, 20.0, 80.0, 80.0);
-    //to understand these magic numbers, look drawArc method in Qt doc
+
     int startAngle = -90 * 16;
     int spanAngle = progress * 360 * 16;
 
     p.drawArc(rectangle, startAngle, spanAngle);
-
     p.drawText(rectangle,Qt::AlignCenter,QString::number(progress*100)+" %");
 }
 
