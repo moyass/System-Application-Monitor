@@ -18,7 +18,8 @@ SOURCES += main.cpp\
     QRoundProgressBar.cpp \
     ../battery.cc \
     ../cpu_frequency.cc \
-    ../cpu_temp.cc
+    ../cpu_temp.cc \
+    ../system-information.cc
 
 HEADERS  += sysmon.h \
     main.h \
@@ -31,5 +32,6 @@ FORMS    += sysmon.ui \
 LIBS += -lprocps
 
 DISTFILES += \
-    ../battery-percentage.sh
+    ../battery-percentage.sh \
+    ../build-Sysmon-Desktop_Qt_5_7_0_GCC_64bit-Debug/cpu-usage.sh
 

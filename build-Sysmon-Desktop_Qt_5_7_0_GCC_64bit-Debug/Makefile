@@ -54,7 +54,8 @@ SOURCES       = ../Sysmon/main.cpp \
 		../Sysmon/QRoundProgressBar.cpp \
 		../battery.cc \
 		../cpu_frequency.cc \
-		../cpu_temp.cc moc_sysmon.cpp \
+		../cpu_temp.cc \
+		../system-information.cc moc_sysmon.cpp \
 		moc_QRoundProgressBar.cpp
 OBJECTS       = main.o \
 		sysmon.o \
@@ -63,9 +64,11 @@ OBJECTS       = main.o \
 		battery.o \
 		cpu_frequency.o \
 		cpu_temp.o \
+		system-information.o \
 		moc_sysmon.o \
 		moc_QRoundProgressBar.o
 DIST          = ../battery-percentage.sh \
+		cpu-usage.sh \
 		../../../Qt5.7.0-2/5.7/gcc_64/mkspecs/features/spec_pre.prf \
 		../../../Qt5.7.0-2/5.7/gcc_64/mkspecs/common/unix.conf \
 		../../../Qt5.7.0-2/5.7/gcc_64/mkspecs/common/linux.conf \
@@ -228,7 +231,8 @@ DIST          = ../battery-percentage.sh \
 		../Sysmon/QRoundProgressBar.cpp \
 		../battery.cc \
 		../cpu_frequency.cc \
-		../cpu_temp.cc
+		../cpu_temp.cc \
+		../system-information.cc
 QMAKE_TARGET  = Sysmon
 DESTDIR       = 
 TARGET        = Sysmon
@@ -572,7 +576,7 @@ distdir: FORCE
 	@test -d $(DISTDIR) || mkdir -p $(DISTDIR)
 	$(COPY_FILE) --parents $(DIST) $(DISTDIR)/
 	$(COPY_FILE) --parents ../Sysmon/sysmon.h ../Sysmon/main.h ../Sysmon/process.h ../Sysmon/QRoundProgressBar.h $(DISTDIR)/
-	$(COPY_FILE) --parents ../Sysmon/main.cpp ../Sysmon/sysmon.cpp ../Sysmon/get-proc-info.cpp ../Sysmon/QRoundProgressBar.cpp ../battery.cc ../cpu_frequency.cc ../cpu_temp.cc $(DISTDIR)/
+	$(COPY_FILE) --parents ../Sysmon/main.cpp ../Sysmon/sysmon.cpp ../Sysmon/get-proc-info.cpp ../Sysmon/QRoundProgressBar.cpp ../battery.cc ../cpu_frequency.cc ../cpu_temp.cc ../system-information.cc $(DISTDIR)/
 	$(COPY_FILE) --parents ../Sysmon/sysmon.ui ../Sysmon/dockwidget.ui $(DISTDIR)/
 
 
@@ -1246,6 +1250,8 @@ sysmon.o: ../Sysmon/sysmon.cpp ../Sysmon/sysmon.h \
 		../../../Qt5.7.0-2/5.7/gcc_64/include/QtWidgets/QFrame \
 		../../../Qt5.7.0-2/5.7/gcc_64/include/QtWidgets/QHeaderView \
 		../../../Qt5.7.0-2/5.7/gcc_64/include/QtWidgets/qheaderview.h \
+		../../../Qt5.7.0-2/5.7/gcc_64/include/QtWidgets/QLabel \
+		../../../Qt5.7.0-2/5.7/gcc_64/include/QtWidgets/qlabel.h \
 		../../../Qt5.7.0-2/5.7/gcc_64/include/QtWidgets/QTabWidget \
 		../../../Qt5.7.0-2/5.7/gcc_64/include/QtWidgets/QTableView \
 		../../../Qt5.7.0-2/5.7/gcc_64/include/QtWidgets/QToolButton \
@@ -1539,7 +1545,6 @@ sysmon.o: ../Sysmon/sysmon.cpp ../Sysmon/sysmon.h \
 		../../../Qt5.7.0-2/5.7/gcc_64/include/QtWidgets/qfontcombobox.h \
 		../../../Qt5.7.0-2/5.7/gcc_64/include/QtWidgets/qgroupbox.h \
 		../../../Qt5.7.0-2/5.7/gcc_64/include/QtWidgets/qkeysequenceedit.h \
-		../../../Qt5.7.0-2/5.7/gcc_64/include/QtWidgets/qlabel.h \
 		../../../Qt5.7.0-2/5.7/gcc_64/include/QtWidgets/qlcdnumber.h \
 		../../../Qt5.7.0-2/5.7/gcc_64/include/QtWidgets/qmainwindow.h \
 		../../../Qt5.7.0-2/5.7/gcc_64/include/QtWidgets/qmdiarea.h \
@@ -1751,6 +1756,9 @@ cpu_frequency.o: ../cpu_frequency.cc ../Sysmon/main.h
 
 cpu_temp.o: ../cpu_temp.cc ../Sysmon/main.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o cpu_temp.o ../cpu_temp.cc
+
+system-information.o: ../system-information.cc ../main.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o system-information.o ../system-information.cc
 
 moc_sysmon.o: moc_sysmon.cpp 
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o moc_sysmon.o moc_sysmon.cpp

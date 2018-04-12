@@ -16,7 +16,7 @@
 #include <proc/readproc.h>
 #include <sys/types.h>
 #include <signal.h>
-
+#include <string>
 
 
 // CPU Temperature
@@ -31,8 +31,8 @@ int Alarm();
 int  CurrentBrightness();
 int  MaxBrightness();
 int  ChargeInfo();
-void PowersaverBattery();
-void PerformaceBattery();
+void Powersave_Battery();
+void Performace_Battery();
 int  BatteryLow();
 int GetBatteryPercentage();
 
@@ -43,6 +43,16 @@ int  CPUFrequencyMin();
 void Powersaver_CPU_FREQ();
 void Performance_CPU_FREQ();
 
+// Get System Information
+std::string GetKernelVersion();
+std::string GetHostName();
+std::string GetPlatformName();
+std::string GetDistroName();
+std::string GetCPUName();
+std::string GetTotalMemory();
+std::string GetTotalStorage();
+double CurrentMemoryUsage();
+double CurrentCPUUsage();
 
 
 typedef struct MemoryHistory {

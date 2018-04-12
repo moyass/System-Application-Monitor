@@ -15,6 +15,7 @@
 #include <QtWidgets/QButtonGroup>
 #include <QtWidgets/QFrame>
 #include <QtWidgets/QHeaderView>
+#include <QtWidgets/QLabel>
 #include <QtWidgets/QPushButton>
 #include <QtWidgets/QTabWidget>
 #include <QtWidgets/QTableView>
@@ -36,11 +37,28 @@ public:
     QTableView *tableView;
     QToolButton *toolButton;
     QWidget *tab_2;
-    QPushButton *pushButton;
-    QPushButton *pushButton_2;
+    QPushButton *PowersaveButton;
+    QPushButton *PerformanceButton;
     QRoundProgressBar *RoundBar1;
     QRoundProgressBar *RoundBar2;
     QRoundProgressBar *RoundBar3;
+    QLabel *label;
+    QLabel *label_2;
+    QLabel *label_3;
+    QLabel *label_4;
+    QLabel *label_5;
+    QLabel *label_6;
+    QLabel *label_7;
+    QLabel *label_8;
+    QLabel *hostname;
+    QLabel *platform;
+    QLabel *distro;
+    QLabel *kernel;
+    QLabel *cpu;
+    QLabel *memory;
+    QLabel *storage;
+    QRoundProgressBar *MemoryUsageBar;
+    QRoundProgressBar *CPUUsageBar;
 
     void setupUi(QWidget *Sysmon)
     {
@@ -230,12 +248,12 @@ public:
         tabWidget->addTab(tab, QString());
         tab_2 = new QWidget();
         tab_2->setObjectName(QStringLiteral("tab_2"));
-        pushButton = new QPushButton(tab_2);
-        pushButton->setObjectName(QStringLiteral("pushButton"));
-        pushButton->setGeometry(QRect(20, 310, 180, 40));
-        pushButton_2 = new QPushButton(tab_2);
-        pushButton_2->setObjectName(QStringLiteral("pushButton_2"));
-        pushButton_2->setGeometry(QRect(20, 390, 180, 40));
+        PowersaveButton = new QPushButton(tab_2);
+        PowersaveButton->setObjectName(QStringLiteral("PowersaveButton"));
+        PowersaveButton->setGeometry(QRect(20, 350, 180, 40));
+        PerformanceButton = new QPushButton(tab_2);
+        PerformanceButton->setObjectName(QStringLiteral("PerformanceButton"));
+        PerformanceButton->setGeometry(QRect(20, 410, 180, 40));
         RoundBar1 = new QRoundProgressBar(tab_2);
         RoundBar1->setObjectName(QStringLiteral("RoundBar1"));
         RoundBar1->setGeometry(QRect(20, 30, 231, 221));
@@ -245,6 +263,61 @@ public:
         RoundBar3 = new QRoundProgressBar(tab_2);
         RoundBar3->setObjectName(QStringLiteral("RoundBar3"));
         RoundBar3->setGeometry(QRect(530, 30, 231, 221));
+        label = new QLabel(tab_2);
+        label->setObjectName(QStringLiteral("label"));
+        label->setGeometry(QRect(240, 280, 151, 16));
+        QFont font1;
+        font1.setBold(true);
+        font1.setWeight(75);
+        label->setFont(font1);
+        label_2 = new QLabel(tab_2);
+        label_2->setObjectName(QStringLiteral("label_2"));
+        label_2->setGeometry(QRect(260, 308, 71, 16));
+        label_3 = new QLabel(tab_2);
+        label_3->setObjectName(QStringLiteral("label_3"));
+        label_3->setGeometry(QRect(260, 328, 81, 20));
+        label_4 = new QLabel(tab_2);
+        label_4->setObjectName(QStringLiteral("label_4"));
+        label_4->setGeometry(QRect(260, 348, 81, 20));
+        label_5 = new QLabel(tab_2);
+        label_5->setObjectName(QStringLiteral("label_5"));
+        label_5->setGeometry(QRect(260, 368, 81, 20));
+        label_6 = new QLabel(tab_2);
+        label_6->setObjectName(QStringLiteral("label_6"));
+        label_6->setGeometry(QRect(260, 388, 81, 20));
+        label_7 = new QLabel(tab_2);
+        label_7->setObjectName(QStringLiteral("label_7"));
+        label_7->setGeometry(QRect(260, 408, 81, 20));
+        label_8 = new QLabel(tab_2);
+        label_8->setObjectName(QStringLiteral("label_8"));
+        label_8->setGeometry(QRect(260, 428, 81, 20));
+        hostname = new QLabel(tab_2);
+        hostname->setObjectName(QStringLiteral("hostname"));
+        hostname->setGeometry(QRect(350, 308, 171, 16));
+        platform = new QLabel(tab_2);
+        platform->setObjectName(QStringLiteral("platform"));
+        platform->setGeometry(QRect(350, 330, 171, 16));
+        distro = new QLabel(tab_2);
+        distro->setObjectName(QStringLiteral("distro"));
+        distro->setGeometry(QRect(350, 351, 171, 16));
+        kernel = new QLabel(tab_2);
+        kernel->setObjectName(QStringLiteral("kernel"));
+        kernel->setGeometry(QRect(350, 370, 171, 16));
+        cpu = new QLabel(tab_2);
+        cpu->setObjectName(QStringLiteral("cpu"));
+        cpu->setGeometry(QRect(350, 390, 301, 16));
+        memory = new QLabel(tab_2);
+        memory->setObjectName(QStringLiteral("memory"));
+        memory->setGeometry(QRect(350, 410, 171, 16));
+        storage = new QLabel(tab_2);
+        storage->setObjectName(QStringLiteral("storage"));
+        storage->setGeometry(QRect(350, 430, 171, 16));
+        MemoryUsageBar = new QRoundProgressBar(tab_2);
+        MemoryUsageBar->setObjectName(QStringLiteral("MemoryUsageBar"));
+        MemoryUsageBar->setGeometry(QRect(650, 270, 111, 111));
+        CPUUsageBar = new QRoundProgressBar(tab_2);
+        CPUUsageBar->setObjectName(QStringLiteral("CPUUsageBar"));
+        CPUUsageBar->setGeometry(QRect(520, 270, 111, 111));
         tabWidget->addTab(tab_2, QString());
 
         retranslateUi(Sysmon);
@@ -265,8 +338,23 @@ public:
         monitorButton->setText(QApplication::translate("Sysmon", "Monitor", 0));
         toolButton->setText(QApplication::translate("Sysmon", "...", 0));
         tabWidget->setTabText(tabWidget->indexOf(tab), QApplication::translate("Sysmon", "Processess", 0));
-        pushButton->setText(QApplication::translate("Sysmon", "Powersaver Mode", 0));
-        pushButton_2->setText(QApplication::translate("Sysmon", "Powersaver Mode", 0));
+        PowersaveButton->setText(QApplication::translate("Sysmon", "Powersaver Mode", 0));
+        PerformanceButton->setText(QApplication::translate("Sysmon", "Performance Mode", 0));
+        label->setText(QApplication::translate("Sysmon", "System Information", 0));
+        label_2->setText(QApplication::translate("Sysmon", "Hostname:", 0));
+        label_3->setText(QApplication::translate("Sysmon", "Platform:", 0));
+        label_4->setText(QApplication::translate("Sysmon", "Distrobution:", 0));
+        label_5->setText(QApplication::translate("Sysmon", "Kernel:", 0));
+        label_6->setText(QApplication::translate("Sysmon", "CPU Model:", 0));
+        label_7->setText(QApplication::translate("Sysmon", "Memory:", 0));
+        label_8->setText(QApplication::translate("Sysmon", "Storage:", 0));
+        hostname->setText(QApplication::translate("Sysmon", "localhost", 0));
+        platform->setText(QApplication::translate("Sysmon", "platform", 0));
+        distro->setText(QApplication::translate("Sysmon", "distro", 0));
+        kernel->setText(QApplication::translate("Sysmon", "kernel", 0));
+        cpu->setText(QApplication::translate("Sysmon", "cpu", 0));
+        memory->setText(QApplication::translate("Sysmon", "memory", 0));
+        storage->setText(QApplication::translate("Sysmon", "storage", 0));
         tabWidget->setTabText(tabWidget->indexOf(tab_2), QApplication::translate("Sysmon", "Hardware Info", 0));
     } // retranslateUi
 

@@ -38,6 +38,8 @@ public slots:
         void refreshButtonHandler();
         void debugButtonHandler();
         void fetch();
+        void setPerformanceMode();
+        void setPowersaveMode();
         void setProgress(int val);
         void connectToSlider();
         void OnDoubleClicked ( const  QModelIndex  & index ) ;

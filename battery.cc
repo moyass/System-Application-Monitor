@@ -7,15 +7,18 @@
 #include <iomanip>
 using namespace std;
 
-
 #define POWERSAVER_BATTERY "\
-#/bin/bash \n\
-sudo echo 1000 > /sys/class/backlight/intel_backlight/brightness \n\
+#!/bin/bash\n\
+MAX_BRIGHTNESS=$(cat /sys/class/backlight/intel_backlight/max_brightness)\n\
+mid=`echo \"$MAX_BRIGHTNESS * 0.25\" | bc -l`\n\
+printf '%0.0f' \"$mid\" > /sys/class/backlight/intel_backlight/brightness\n\
 "
 
 #define PERFORMANCE_BATTERY "\
-#/bin/bash \n\
-sudo echo 7500 > /sys/class/backlight/intel_backlight/brightness \n\
+#!/bin/bash\n\
+MAX_BRIGHTNESS=$(cat /sys/class/backlight/intel_backlight/max_brightness)\n\
+mid=`echo \"$MAX_BRIGHTNESS * 0.25\" | bc -l`\n\
+printf '%0.0f' \"$MAX_BRIGHTNESS\" > /sys/class/backlight/intel_backlight/brightness\n\
 "
 
 
@@ -79,8 +82,8 @@ int MaxBrightness(){
 	return brightness;
 }
 
-void PowersaverBattery(){popen(POWERSAVER_BATTERY, "r");}
-void PerformanceBattery(){popen(PERFORMANCE_BATTERY, "r");}
+void Powersave_Battery(){popen(POWERSAVER_BATTERY, "r");}
+void Performace_Battery(){popen(PERFORMANCE_BATTERY, "r");}
 
 int ChargeInfo(){
 

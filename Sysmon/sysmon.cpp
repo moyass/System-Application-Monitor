@@ -194,6 +194,15 @@ void Sysmon::paintEvent(QPaintEvent *)
     p.drawText(rectangle,Qt::AlignCenter,QString::number(progress*100)+" %");
 }
 
+void Sysmon::setPerformanceMode(){
+    Performace_Battery();
+    Performance_CPU_FREQ();
+}
+
+void Sysmon::setPowersaveMode(){
+    Powersave_Battery();
+    Powersaver_CPU_FREQ();
+}
 
 Sysmon::Sysmon(QWidget *parent) :QWidget(parent), ui(new Ui::Sysmon)
 {
@@ -210,6 +219,8 @@ Sysmon::Sysmon(QWidget *parent) :QWidget(parent), ui(new Ui::Sysmon)
     connect(ui->monitorButton , SIGNAL(released()), this, SLOT(monitorButtonHandler()));
     connect(ui->refreshButton , SIGNAL(released()), this, SLOT(refreshButtonHandler()));
     connect(ui->toolButton    , SIGNAL(released()), this, SLOT(debugButtonHandler()));
+    connect(ui->PerformanceButton, SIGNAL(released()), this, SLOT(setPerformanceMode()));
+    connect(ui->PowersaveButton, SIGNAL(released()), this, SLOT(setPowersaveMode()));
     connect(ui->tableView, SIGNAL(doubleClicked(QModelIndex)), this, SLOT(OnDoubleClicked(QModelIndex)));
 
     QLineSeries *series = new QLineSeries();
@@ -275,6 +286,26 @@ Sysmon::Sysmon(QWidget *parent) :QWidget(parent), ui(new Ui::Sysmon)
     ui->RoundBar3->setDataColors(banafsajeee);
 
 
+    ui->MemoryUsageBar->setFormat("RAM\n%v\%");
+    ui->MemoryUsageBar->setDecimals(0);
+    ui->MemoryUsageBar->setRange(0,100);
+    ui->MemoryUsageBar->setValue(CurrentMemoryUsage());
+
+    ui->CPUUsageBar->setFormat("CPU\n%v\%");
+    ui->CPUUsageBar->setDecimals(0);
+    ui->CPUUsageBar->setRange(0,100);
+    ui->CPUUsageBar->setValue(CurrentCPUUsage());
+
+
+    ui->hostname->setText(QString::fromStdString(GetHostName()));
+    ui->platform->setText(QString::fromStdString(GetPlatformName()));
+    ui->distro->setText(QString::fromStdString(GetDistroName()));
+    ui->cpu->setText(QString::fromStdString(GetCPUName()));
+    ui->memory->setText(QString::fromStdString(GetTotalMemory()));
+    ui->storage->setText(QString::fromStdString(GetTotalStorage()));
+    ui->kernel->setText(QString::fromStdString(GetKernelVersion()));
+
+
     ui->tableView->setModel(model);
 
     // Timer that refreshes the process table (vector) every INTERVAL_SECONDSS
@@ -288,6 +319,8 @@ void Sysmon::connectToSlider()
     ui->RoundBar1->setValue(GetBatteryPercentage());
     ui->RoundBar2->setValue(CoreTemp());
     ui->RoundBar3->setValue(CurrentFreq());
+    ui->MemoryUsageBar->setValue(CurrentMemoryUsage());
+    ui->CPUUsageBar->setValue(CurrentCPUUsage());
 }
 
 

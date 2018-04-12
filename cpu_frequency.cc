@@ -14,18 +14,19 @@ using namespace std;
 
 #define POWERSAVER_CPU_FREQ "\
 #/bin/bash \n\
-sudo cpupower frequency-set -g powersave \n\
+sudo -A cpupower frequency-set -g powersave \n\
 "
 
 #define PERFORMANCE_CPU_FREQ "\
 #/bin/bash \n\
-sudo cpupower frequency-set -g performance \n\
+sudo -A cpupower frequency-set -g performance \n\
 "
 
 //frequency file paths
 #define MAX "cat /sys/devices/system/cpu/cpufreq/policy0/cpuinfo_max_freq"
 #define MIN "cat /sys/devices/system/cpu/cpufreq/policy0/cpuinfo_min_freq"
 #define CURRENT "cat /sys/devices/system/cpu/cpufreq/policy*/scaling_cur_freq"
+
 
 int CPUFrequencyMax(){
 	string line;
